@@ -9,7 +9,7 @@ const HeroSection = ({title, subtitle, extraComponent, imageSrc, background, tex
     <div className={`w-full h-full p-5  ${background} flex `}>
         <div className={`w-full flex items-center ${centerContent? 'justify-center':'pt-5'} ${textColor} flex-col`}>
           <div>
-            <p className='md:text-7xl text-5xl text-center mb-3'>{title}</p>
+            <p className='md:text-6xl text-5xl text-center mb-3'>{title}</p>
             {subtitle && <p className='text-xl text-center'>{subtitle}</p>}
           </div>
             {extraComponent}
