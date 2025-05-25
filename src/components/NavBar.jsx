@@ -2,7 +2,6 @@ import React from 'react'
 import { NavigationMenu,
         NavigationMenuList,
         NavigationMenuItem,
-        NavigationMenuLink
  } from './ui/navigation-menu'
 import { Button } from './ui/button'
 import { AlignJustify } from 'lucide-react'
@@ -37,12 +36,12 @@ const NavBar = ({Logo}) => {
                     <div className='max-md:sr-only md:flex md:flex-row gap-5 items-center'> 
                         <NavBarButton text={'Inicio'} link={'/'}/>
                         <Link to="/login">
-                            <Button className='text-lg bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold'>
+                            <Button className='text-base bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold'>
                                 PROGRAMÁ TU ENVÍO
                             </Button>
                         </Link>
                         <Link to="/login">
-                            <Button className='text-lg bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold'>
+                            <Button className='text-base bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold'>
                                 INICIAR SESIÓN
                             </Button>
                         </Link>

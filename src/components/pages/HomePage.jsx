@@ -42,7 +42,7 @@ const HomePage = () => {
 
               <ServiceCard
               title={"Historial de pedidos"}
-              content={"Accedé a tu historial de pedidos."}
+              content={"Accedé a tu historial de pedidos en tiempo real."}
               icon={<History className='text-dubraSecondary'/>}
               background={'outline-1 outline-dubraSecondary'}>
               </ServiceCard>
