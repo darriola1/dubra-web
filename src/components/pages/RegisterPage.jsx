@@ -3,7 +3,7 @@ import HeroSection from '../HeroSection';
 
 const RegisterPage = () => {
   return (
-        <div>
+        <div className='pt-20'>
           <HeroSection
           extraComponent={<RegisterForm/>}
           background={'bg-gradient-to-br from-dubraText to-dubraPrimary pt-25'}

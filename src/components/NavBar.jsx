@@ -2,7 +2,6 @@ import React from 'react'
 import { NavigationMenu,
         NavigationMenuList,
         NavigationMenuItem,
-        NavigationMenuLink
  } from './ui/navigation-menu'
 import { Button } from './ui/button'
 import { AlignJustify } from 'lucide-react'
@@ -26,8 +25,7 @@ const NavBar = ({Logo}) => {
                 </NavigationMenuItem>
             </NavigationMenuList>
 
-            {//NavBar for medium display and bigger.
-            }
+            {/*NavBar for medium display and bigger.*/}
             <div className='flex items-center w-fit h-fit'> 
 
                 <Button className='bg-dubraSecondaryHover p-0 md:sr-only ' onClick={() => setIsOpen(!isOpen)}>
@@ -36,26 +34,23 @@ const NavBar = ({Logo}) => {
 
                 <ul >
                     <div className='max-md:sr-only md:flex md:flex-row gap-5 items-center'> 
-
                         <NavBarButton text={'Inicio'} link={'/'}/>
-                        <NavBarButton text={'Sobre Nosotros'} link={'/nosotros'}/>
                         <Link to="/login">
-                            <Button className='text-lg bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold'>
-                                Iniciar Sesión
+                            <Button className='text-base bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold'>
+                                PROGRAMÁ TU ENVÍO
                             </Button>
                         </Link>
-
+                        <Link to="/login">
+                            <Button className='text-base bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold'>
+                                INICIAR SESIÓN
+                            </Button>
+                        </Link>
                     </div>
                 </ul>
-
             </div>
 
-
-            
-            
         </NavigationMenu>
-            {//NavBar for smaller than medium display.
-            }
+            {/*NavBar for smaller than medium displaYYy.*/}
         <div className={`absolute right-0 mt-2 w-48 bg-dubraSecondary rounded-lg shadow-lg md:sr-only ${isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'} transition-all duration-300`}>
             <NavigationMenu>
                 <ul className="py-2 mx-5">
