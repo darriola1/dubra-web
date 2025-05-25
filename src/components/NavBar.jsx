@@ -56,6 +56,7 @@ const NavBar = ({Logo}) => {
                 <ul className="py-2 mx-5">
                     <NavBarButton text={'Inicio'} link={'/'}/>
                     <NavBarButton text={'Sobre Nosotros'} link={'/nosotros'}/>
+                    <NavBarButton text={'Iniciar Sesión'} link={'/login'}/>
                 </ul>
             </NavigationMenu>
         </div>

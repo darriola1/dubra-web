@@ -12,8 +12,7 @@
 @layer components {
 
   .bg-dubraPrimary {
-    @apply bg-dubraPrimary;
-    @apply text-dubraText;
+    @apply bg-dubraPrimary text-dubraText;
   }
 
   .bg-dubraSecondary {
@@ -21,8 +20,7 @@
   }
 
   .bg-dubraWhite{
-    @apply bg-dubraWhite;
-    @apply text-dubraPrimary;
+    @apply bg-dubraWhite text-dubraPrimary;
   }
 
 }
@@ -32,6 +30,7 @@
   --color-dubraSecondary: #c84630;
   --color-dubraText: #e9f2ef;
   --color-dubraWhite: #fefefe;
+  --breakpoint-xs: 25rem;
 }
 
 @layer base {

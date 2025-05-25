@@ -22,7 +22,7 @@ const HomePage = () => {
         title={'GESTIONÁ TU PEDIDO CON NOSOTROS'}
         background={'bg-dubraWhite'}
         textColor={'text-dubraPrimary'}
-        fit={true}
+        customHeight='h-fit'
         extraComponent={
           <div className='flex h-full pb-5 flex-col justify-center items-center'>
             <CardGrid> 
@@ -64,13 +64,13 @@ const HomePage = () => {
            <br/> Buscamos ser el nexo entre nuestros clientes, uniendo Montevideo y Ciudad de la Costa.</p>
         </div>}
         background={'bg-dubraPrimary'}
-        fit={true}/>
+        customHeight='h-fit'/>
 
         <HeroSection
         title={'¿POR QUÉ ELEGIRNOS?'}
         background={'bg-dubraWhite'}
         textColor={'text-dubraPrimary'}
-        fit={true}
+        customHeight='h-fit'
         extraComponent={
           <div className='flex h-full pb-5 flex-col justify-center items-center'>
             <CardGrid> 

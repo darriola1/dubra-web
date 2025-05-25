@@ -54,14 +54,14 @@ export default function FormBuilder({
     <Card className={`w-full max-w-md ${background}`}>
       <CardHeader>
         <CardTitle className="text-3xl">{title}</CardTitle>
-        <CardDescription className="text-md">{description}</CardDescription>
+        <CardDescription className="text-lg">{description}</CardDescription>
       </CardHeader>
 
       <CardContent>
-        <form onSubmit={handleSubmit(handleFormSubmit)} className="grid gap-4">
+        <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col gap-4">
           {fields.map(({ name, label, type = 'text', placeholder }) => (
-            <div className="grid gap-2" key={name}>
-              <Label htmlFor={name}>{label}</Label>
+            <div className="" key={name}>
+              <Label htmlFor={name} className='text-lg'>{label}</Label>
               <Input
                 id={name}
                 type={type}
@@ -76,7 +76,7 @@ export default function FormBuilder({
           {error && (
             <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm">{error}</div>
           )}
-          <div className='w-full flex justify-center'>
+          <div className='w-full flex justify-center max-xs:scale-85'>
             <ReCAPTCHA
             sitekey="6Le6TT0rAAAAAHU_N1_hMggXegZoA8gyl4FNeEEM"
             onChange={(token) => setRecaptchaToken(token)}

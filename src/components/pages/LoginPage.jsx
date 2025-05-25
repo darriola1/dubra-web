@@ -5,10 +5,11 @@ const LoginPage = () => {
   return (
     <div className='pt-20'>
           <HeroSection
-          title={'Bienvenido de nuevo'}
           extraComponent={<LoginForm/>}
-          background={'bg-gradient-to-br from-dubraText to-dubraPrimary'}
-          fit={true}
+          background={'bg-gradient-to-br from-dubraText to-dubraPrimary pt-20'}
+          customHeight='h-dvh'
+          centerContent={true}
+          textColor={'text-dubraPrimary'}
           />
     </div>
   );
