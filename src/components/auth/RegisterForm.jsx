@@ -4,12 +4,32 @@ import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL, ROUTES } from '../../lib/constants';
 
+// Definición de esquema de validacion usando Zod
+//test(val) devuelve true si el texto contiene el patrón buscado por la expresion regular
 const schema = z.object({
-  name: z.string().min(2, 'El nombre es obligatorio, minimo 3 caracteres'),
+  name: z.string()
+  .min(3, 'El nombre es obligatorio, minimo 3 caracteres')
+  .refine((val) => !/<\/?[a-z][\s\S]*>/i.test(val), {
+    message: 'El nombre contiene caracteres inválidos',
+  }),
   email: z.string().email('Email inválido'),
   password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
+  password: z.string()
+  .min(6, 'Debe tener al menos 6 caracteres')
+  .refine((val) => /[a-z]/.test(val), {
+    message: 'Debe contener al menos una letra minúscula',
+  })
+  .refine((val) => /[A-Z]/.test(val), {
+    message: 'Debe contener al menos una letra mayúscula',
+  })
+  .refine((val) => /\d/.test(val), {
+    message: 'Debe contener al menos un número',
+  })
+  .refine((val) => /[\W_]/.test(val), {
+    message: 'Debe contener al menos un símbolo',
+  }),
   confirmPassword: z.string().min(6, 'Confirmación obligatoria'),
-  rut: z.string().min(1, 'El RUT es obligatorio, minimo 12 caracteres'),
+  rut: z.string().min(12, 'El RUT es obligatorio, minimo 12 caracteres'),
 }).refine((data) => data.password === data.confirmPassword, {
   message: 'Las contraseñas no coinciden',
   path: ['confirmPassword'],
