@@ -3,6 +3,7 @@ import FormBuilder from '../FormBuilder';
 import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL, ROUTES } from '../../lib/constants';
+import { useAuth } from './route-context/AuthContext';
 
 const schema = z.object({
   email: z.string().min(1, 'El email es obligatorio').email('Email inválido'),
@@ -11,14 +12,15 @@ const schema = z.object({
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const onSubmit = async (data) => {
-    // El token recaptcha lo recibe el FormBuilder y lo pasa acá dentro de data
     const { email, password, recaptchaToken } = data;
 
     const res = await fetch(`${API_BASE_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ email, password, recaptchaToken }),
     });
 
@@ -27,6 +29,7 @@ export default function LoginForm() {
       throw new Error(result.error || 'Error al loguear');
     }
 
+    await login(); 
     navigate('/dashboard');
   };
 
