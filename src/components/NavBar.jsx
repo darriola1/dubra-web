@@ -50,7 +50,7 @@ const NavBar = ({Logo}) => {
             </div>
 
         </NavigationMenu>
-            {/*NavBar for smaller than medium displaYYy.*/}
+            {/*NavBar for smaller than medium display.*/}
         <div className={`absolute right-0 mt-2 w-48 bg-dubraSecondary rounded-lg shadow-lg md:sr-only ${isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'} transition-all duration-300`}>
             <NavigationMenu>
                 <ul className="py-2 mx-5">

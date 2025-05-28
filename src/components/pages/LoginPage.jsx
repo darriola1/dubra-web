@@ -7,7 +7,7 @@ const LoginPage = () => {
           <HeroSection
           extraComponent={<LoginForm/>}
           background={'bg-gradient-to-br from-dubraText to-dubraPrimary pt-20'}
-          customHeight='h-dvh'
+          customHeight='h-full'
           centerContent={true}
           textColor={'text-dubraPrimary'}
           />
