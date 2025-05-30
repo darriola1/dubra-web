@@ -1,6 +1,6 @@
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@radix-ui/react-navigation-menu";
 import Dashboard from "../Dashboard";
-import { Database } from 'lucide-react'
+import { ArrowBigRight, Database } from 'lucide-react'
 import NavBarButton from "../NavBarButton";
 
 const DashboardPage = () => {
@@ -8,9 +8,11 @@ const DashboardPage = () => {
   //POR EL MOMENTO PAGINA DE PRUEBA PARA QUE REDIGIRA A ALGUN LADO CON LOGIN Y REGISTER
   return (
     <div>
-      <section className="bg-dubraWhite min-h-screen flex justify-center pt-25">
-      <div className='grid sm:grid-cols-5 w-full max-sm:grid-cols-6'>
-        <div className='sm:col-span-1 max-sm:col-span-2 bg-dubraSecondary'>
+      <section className="bg-dubraPrimary min-h-screen flex pt-25">
+        
+      <div className='grid grid-cols-6 w-full '>
+        
+        <div className='sm:col-span-1 bg-dubraSecondary max-md:hidden '>
           <NavigationMenu>
 
             <NavigationMenuList  className='flex justify-center gap-5 flex-col items-center pt-5'>
@@ -33,12 +35,18 @@ const DashboardPage = () => {
           
         </div>
 
-        <div className='sm:col-span-4 max-sm:col-span-4 bg-dubraPrimary w-full'>
+        <div className='md:col-span-5 max-md:col-span-6 w-full'>
+          <h1 className="ps-5 pt-5 text-5xl max-md:text-center">Dashboard.</h1>
           <Dashboard/>
         </div>
       </div>
 
-          
+      <div className="fixed h-full flex items-center pb-25">
+        <div className="bg-dubraSecondary py-5 rounded-r hover:bg-dubraSecondary/80  md:hidden">
+          <ArrowBigRight/>
+        </div>
+      </div>
+          {/* todo: showing and hiding DASHBOARD PAGE NAVIGATION MENU */}
       </section>
     </div>
   );

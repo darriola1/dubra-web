@@ -8,7 +8,7 @@ NavBarButton
 
 const Footer = () => {
   return (
-    <footer className='grid bg-dubraPrimary p-5 grid-cols-6 gap-5 text-lg'>
+    <footer className='grid bg-dubraPrimary p-5 grid-cols-6 gap-5 text-lg '>
         <div className='max-md:col-span-6 md:col-span-3 px-3'>
             <p className='font-black text-xl pb-5'>DUBRA <br/> Transporte y Logística</p>
             <p>Soluciones de transporte y logística para empresas en Ciudad de la Costa - Montevideo.</p>
