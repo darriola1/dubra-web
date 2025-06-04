@@ -82,6 +82,7 @@ export default function RegisterForm() {
           </Link>
         </p>
       }
+      recaptcha={true}
     />
   );
 }

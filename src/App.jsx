@@ -1,6 +1,6 @@
 import './styles.css'
 import './tailwind.css'
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import HomePage from './components/pages/HomePage'
 import RegisterPage from './components/pages/RegisterPage'
 import LoginPage from './components/pages/LoginPage'
@@ -9,6 +9,10 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 function App() {
+  const location = useLocation();
+
+  const hideFooterRoutes = ["/dashboard"];
+  const showFooter = !hideFooterRoutes.includes(location.pathname);
 
   return (
     <>
@@ -19,7 +23,7 @@ function App() {
           <Route path="/registrarse" element={<RegisterPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
         </Routes>
-      <Footer />
+      {showFooter && <Footer />}
     </>
   )
 }

@@ -1,14 +1,14 @@
 import React from 'react'
 import HeroSection from '../HeroSection'
 import ServiceCard from '../ServiceCard'
-import camioneta from '@/assets/camionetaFiorino.jpg'
-import { Truck, FileText, PackageOpen, History, Rat } from 'lucide-react'
+import camioneta from '@/assets/DubraCamioneta1.png'
+import { Truck, FileText, PackageOpen, History } from 'lucide-react'
 import TrackingInputGroup from '../TrackingInputGroup'
 import CardGrid from '../CardGrid'
 
 const HomePage = () => {
   return (
-    <div>
+    <div className='pt-25'>
         <HeroSection
         imageSrc={camioneta}
         title={'SEGUÍ TU ENVÍO'}

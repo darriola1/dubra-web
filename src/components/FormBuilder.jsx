@@ -18,7 +18,8 @@ export default function FormBuilder({
   defaultValues,
   onSubmit,
   footer,
-  background
+  background,
+  recaptcha
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -51,7 +52,7 @@ export default function FormBuilder({
     }
   };
   return (
-    <Card className={`w-full max-w-md ${background}`}>
+    <Card className={`w-full max-w-md h-fit ${background}`}>
       <CardHeader>
         <CardTitle className="text-3xl">{title}</CardTitle>
         <CardDescription className="text-lg">{description}</CardDescription>
@@ -59,30 +60,35 @@ export default function FormBuilder({
 
       <CardContent>
         <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col gap-4">
-          {fields.map(({ name, label, type = 'text', placeholder }) => (
-            <div className="" key={name}>
-              <Label htmlFor={name} className='text-lg'>{label}</Label>
-              <Input
-                id={name}
-                type={type}
-                placeholder={placeholder}
-                disabled={isLoading}
-                {...register(name)}
-              />
-              <FormError errors={errors} name={name} />
-            </div>
-          ))}
+          <div className={`items-end ${fields.length>3?'grid grid-cols-2 gap-3':''}`}>
+            {fields.map(({ name, label, type = 'text', placeholder }, index) => (
+              <div className={fields.length > 3 && index === fields.length - 1 && fields.length % 2 > 0? 'col-span-2' : ''} key={name}>
+                <Label htmlFor={name} className='text-lg'>{label}</Label>
+                <Input
+                  id={name}
+                  type={type}
+                  placeholder={placeholder}
+                  disabled={isLoading}
+                  {...register(name)}
+                />
+                <FormError errors={errors} name={name} />
+              </div>
+            ))}
+          </div>
+
 
           {error && (
             <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm">{error}</div>
           )}
+          {recaptcha &&
           <div className='w-full flex justify-center max-xs:scale-85'>
             <ReCAPTCHA
             sitekey="6Le6TT0rAAAAAHU_N1_hMggXegZoA8gyl4FNeEEM"
             onChange={(token) => setRecaptchaToken(token)}
             onExpired={() => setRecaptchaToken(null)}
             />
-          </div>
+          </div>}
+          
           
 
           <Button

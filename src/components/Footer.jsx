@@ -1,7 +1,7 @@
 import React from 'react'
 import { Phone, MapPin, Mail, Hop } from 'lucide-react'
 import { NavigationMenuList, NavigationMenu } from './ui/navigation-menu'
-import NavBarButton from './NavBarButton'
+import NavBarButton from './navbar/NavBarButton'
 import SocialButton from './SocialButton'
 
 NavBarButton

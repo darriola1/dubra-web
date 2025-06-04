@@ -3,11 +3,11 @@ import HeroSection from '../HeroSection';
 
 const RegisterPage = () => {
   return (
-        <div className='pt-20'>
+        <div className=''>
           <HeroSection
           extraComponent={<RegisterForm/>}
           background={'bg-gradient-to-br from-dubraText to-dubraPrimary pt-25'}
-          customHeight='h-full'
+          customHeight='h-dvh'
           centerContent={true}
           />
         </div>
