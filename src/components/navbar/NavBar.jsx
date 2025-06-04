@@ -8,57 +8,43 @@ import NavBarButton from './NavBarButton'
 import { Link } from 'react-router-dom';
 import { Button } from '../ui/button';
 import ResponsiveNavBar from './ResponsiveNavBar';
+import DubraLogo from '../DubraLogo';
 
 
-const NavBar = ({Logo}) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const menuRef = useRef(null);
+const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo}) => {
 
-    useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsOpen(false); // Cierra el menú
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   return (
-
-    <div>
+<div>
         <NavigationMenu className='justify-between min-w-full bg-dubraPrimary py-2'>
+
+            {Logo && 
             <NavigationMenuList>
                 <NavigationMenuItem>
                     <Link to='/'>
-                        <img src={Logo} alt="Dubra Transporte y Logística Logo" className='w-70 h-22 pe-10 object-contain' />
+                        <DubraLogo className={'w-70 h-22 pe-10 object-contain'}/>
                     </Link>
                 </NavigationMenuItem>
-            </NavigationMenuList>
+            </NavigationMenuList>}
 
             {/*NavBar for medium display and bigger.*/}
             <div className='flex items-center w-fit h-fit'> 
 
-                <Button className='bg-dubraSecondaryHover p-0 md:sr-only ' onClick={() => setIsOpen(!isOpen)}>
-                    <AlignJustify className='w-fit h-fit' size={28}/>
-                </Button>
+                {extraButton}
 
                 <ul >
-                    <div className='max-md:sr-only md:flex md:flex-row gap-5 items-center'> 
-                        <NavBarButton text={'Inicio'} link={'/'}/>
-                        <Link to="/login">
+                    <div className='max-md:sr-only md:flex md:flex-row gap-5 items-center'>
+                        {fields.map(({link, text, icon}) => (
+                            <NavBarButton text={text} link={link} icon={icon && icon}/>
+                        ))}
+                        {extraFields && extraFields.map(({link, text, icon}) => (
+                            <Link to={link}>
                             <Button className='text-base bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold'>
-                                PROGRAMÁ TU ENVÍO
+                                {icon && icon}
+                                {text}
                             </Button>
                         </Link>
-                        <Link to="/login">
-                            <Button className='text-base bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold'>
-                                INICIAR SESIÓN
-                            </Button>
-                        </Link>
+                        ))}
                     </div>
                 </ul>
             </div>
@@ -66,13 +52,12 @@ const NavBar = ({Logo}) => {
         </NavigationMenu>
             {/*NavBar for smaller than medium display.*/}
         <ResponsiveNavBar
-            fields={[
-            { text: 'INICIAR SESIÓN', link: '/login', icon:<User/> },
-            { text: 'INICIO', link: '/', icon:<Home/> }
-            ]}
+            fields={
+                fields.concat(extraFields)
+            }
             className={` right-0 ${isOpen ? 'opacity-100 visible bg-black/50' : 'opacity-0 invisible'} `}
             menuRef={menuRef}
-            Logo = {Logo}
+            Logo={true}
         />
     </div>
   )

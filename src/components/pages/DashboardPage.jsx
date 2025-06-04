@@ -1,10 +1,9 @@
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@radix-ui/react-navigation-menu";
 import Dashboard from "../dashboard/Dashboard";
-import { ArrowBigRight, Database } from 'lucide-react'
+import { ArrowBigRight, Database, PackageSearch, Phone, User } from 'lucide-react'
 import NavBarButton from "../navbar/NavBarButton";
 import ResponsiveNavBar from "../navbar/ResponsiveNavBar";
 import { useEffect, useRef, useState } from "react";
-import Logo from '@/assets/LogoSF.png'
 
 const DashboardPage = () => {
 
@@ -14,7 +13,7 @@ const DashboardPage = () => {
     useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsOpen(false); // Cierra el menú
+        setIsOpen(false);
       }
     };
 
@@ -36,7 +35,7 @@ const DashboardPage = () => {
           ]}
           menuRef={menuRef}
           className={`justify-start ${isOpen ? 'opacity-100 visible bg-black/50' : 'opacity-0 invisible'} `}
-          Logo={Logo}/>
+          Logo={true}/>
 
         <div className='sm:col-span-1 bg-dubraPrimary max-md:hidden'>
           <NavigationMenu>
@@ -45,7 +44,11 @@ const DashboardPage = () => {
                   
                   <NavBarButton text={'DashBoard'} link={'/dashboard'} icon={<Database/>}/>
 
-                  <NavBarButton text='Hola' link={'/dashboard'}/>
+                  <NavBarButton text={'Gestioná tus Pedidos'} link={'/orderManager'} icon={<PackageSearch/>}/>
+
+                  <NavBarButton text={'Personalizá tu Perfil'} link={'/profile'} icon={<User/>}/>
+
+                  <NavBarButton text={'Ponete en Contacto'} link={'/contact'} icon={<Phone/>}/>
 
             </NavigationMenuList>
 

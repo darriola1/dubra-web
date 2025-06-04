@@ -1,6 +1,7 @@
 import React from 'react'
 import NavBarButton from './NavBarButton'
 import { NavigationMenu } from '@radix-ui/react-navigation-menu'
+import DubraLogo from '../DubraLogo'
 
 const ResponsiveNavBar = ({menuRef, fields, className, Logo}) => {
   return (
@@ -9,7 +10,7 @@ const ResponsiveNavBar = ({menuRef, fields, className, Logo}) => {
                  className='w-2/3 max-w-xs bg-dubraSecondary' >
                     <NavigationMenu>
                         <ul className="py-5 px-5 flex flex-col gap-5">
-                          <img src={Logo} alt="Dubra Transporte y Logística Logo" className='w-70 h-22 object-contain' />
+                          {Logo && <DubraLogo/>}
                           {fields.map(({icon, link, text}) => (
                             <NavBarButton icon={icon && icon} link={link} text={text}/>
                           ))}
