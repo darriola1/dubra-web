@@ -4,7 +4,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import HomePage from './components/pages/HomePage'
 import RegisterPage from './components/pages/RegisterPage'
 import LoginPage from './components/pages/LoginPage'
-import DashboardPage from './components/pages/DashboardPage'
+import DashboardPage from './components/pages/DashboardPage2'
 import Header from './components/Header';
 import Footer from './components/Footer';
 

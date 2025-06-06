@@ -11,7 +11,7 @@ import ResponsiveNavBar from './ResponsiveNavBar';
 import DubraLogo from '../DubraLogo';
 
 
-const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo}) => {
+const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo, className, width}) => {
 
 
   return (
@@ -28,12 +28,12 @@ const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo}) => {
             </NavigationMenuList>}
 
             {/*NavBar for medium display and bigger.*/}
-            <div className='flex items-center w-fit h-fit'> 
+            <div className={`'flex items-center w-${width? width: 'fit'} h-fit'`}> 
 
-                {extraButton}
+                {extraButton && extraButton}
 
-                <ul >
-                    <div className='max-md:sr-only md:flex md:flex-row gap-5 items-center'>
+                <ul className='w-full'>
+                    <div className={`max-md:sr-only md:flex md:flex-row gap-5 items-center ${className}`}>
                         {fields.map(({link, text, icon}) => (
                             <NavBarButton text={text} link={link} icon={icon && icon}/>
                         ))}

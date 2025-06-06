@@ -1,5 +1,5 @@
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@radix-ui/react-navigation-menu";
-import Dashboard from "../dashboard/Dashboard";
+import Dashboard from "../dashboard/Dashboard2";
 import { ArrowBigRight, Database, PackageSearch, Phone, User } from 'lucide-react'
 import NavBarButton from "../navbar/NavBarButton";
 import ResponsiveNavBar from "../navbar/ResponsiveNavBar";
@@ -14,7 +14,7 @@ const DashboardPage = () => {
       {text: 'Personalizá tu Perfil', link:'/profile', icon:<User/> },
       {text: 'Ponete en Contacto', link:'/contact', icon:<Phone/> },
     ];
-
+  
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -54,7 +54,7 @@ const DashboardPage = () => {
           
         </div>
 
-        <div className='md:col-span-5 max-md:col-span-6 w-full'>
+        <div className='md:col-span-5 max-md:col-span-6 w-full p-5'>
           <Dashboard/>
         </div>
       </div>
