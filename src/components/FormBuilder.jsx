@@ -35,7 +35,8 @@ export default function FormBuilder({
   });
 
   const handleFormSubmit = async (data) => {
-    if (!recaptchaToken) {
+    // Si el reCAPTCHA esta habilitado para usar se verifica que se haya completado. Ya que no se usa para todos los formularios
+    if (recaptcha && !recaptchaToken) {
       setError('Por favor completá el reCAPTCHA');
       return;
     }
@@ -44,7 +45,10 @@ export default function FormBuilder({
     setError(null);
 
     try {
-      await onSubmit({ ...data, recaptchaToken });
+      await onSubmit({
+        ...data,
+        ...(recaptcha ? { recaptchaToken } : {}) //Solo se pasa el token si reCAPTCHA está habilitado
+      });
     } catch (err) {
       setError(err.message || 'Error inesperado');
     } finally {
@@ -60,9 +64,9 @@ export default function FormBuilder({
 
       <CardContent>
         <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col gap-4">
-          <div className={`items-end ${fields.length>3?'grid grid-cols-2 gap-3':''}`}>
+          <div className={`items-end ${fields.length > 3 ? 'grid grid-cols-2 gap-3' : ''}`}>
             {fields.map(({ name, label, type = 'text', placeholder }, index) => (
-              <div className={fields.length > 3 && index === fields.length - 1 && fields.length % 2 > 0? 'col-span-2' : ''} key={name}>
+              <div className={fields.length > 3 && index === fields.length - 1 && fields.length % 2 > 0 ? 'col-span-2' : ''} key={name}>
                 <Label htmlFor={name} className='text-lg'>{label}</Label>
                 <Input
                   id={name}
@@ -81,15 +85,15 @@ export default function FormBuilder({
             <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm">{error}</div>
           )}
           {recaptcha &&
-          <div className='w-full flex justify-center max-xs:scale-85'>
-            <ReCAPTCHA
-            sitekey="6Le6TT0rAAAAAHU_N1_hMggXegZoA8gyl4FNeEEM"
-            onChange={(token) => setRecaptchaToken(token)}
-            onExpired={() => setRecaptchaToken(null)}
-            />
-          </div>}
-          
-          
+            <div className='w-full flex justify-center max-xs:scale-85'>
+              <ReCAPTCHA
+                sitekey="6Le6TT0rAAAAAHU_N1_hMggXegZoA8gyl4FNeEEM"
+                onChange={(token) => setRecaptchaToken(token)}
+                onExpired={() => setRecaptchaToken(null)}
+              />
+            </div>}
+
+
 
           <Button
             type="submit"
