@@ -11,8 +11,8 @@ const ResponsiveNavBar = ({menuRef, fields, className, Logo}) => {
                     <NavigationMenu>
                         <ul className="py-5 px-5 flex flex-col gap-5">
                           {Logo && <DubraLogo/>}
-                          {fields.map(({icon, link, text}) => (
-                            <NavBarButton icon={icon && icon} link={link} text={text}/>
+                          {fields.map(({icon, link, text}, index) => (
+                            <NavBarButton key={link+index} icon={icon && icon} link={link} text={text}/>
                           ))}
                         </ul>
                     </NavigationMenu>

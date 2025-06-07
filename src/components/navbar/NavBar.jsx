@@ -34,14 +34,15 @@ const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo, classN
 
                 <ul className='w-full'>
                     <div className={`max-md:sr-only md:flex md:flex-row gap-5 items-center ${className}`}>
-                        {fields.map(({link, text, icon}) => (
-                            <NavBarButton text={text} link={link} icon={icon && icon}/>
+                        {fields.map(({link, text, icon}, index) => (
+                            <NavBarButton key={link+index} text={text} link={link} icon={icon && icon}/>
                         ))}
-                        {extraFields && extraFields.map(({link, text, icon}) => (
-                            <Link to={link}>
-                            <Button className='text-base bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold'>
+                        {extraFields && extraFields.map(({link, text, icon,}, index) => (
+                            <Link to={link} key={link+index}>
+                            <Button className='text-base bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold' key={link+index}>
                                 {icon && icon}
                                 {text}
+                                
                             </Button>
                         </Link>
                         ))}

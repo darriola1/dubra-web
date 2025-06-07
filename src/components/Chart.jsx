@@ -32,7 +32,7 @@ const Chart = ( {/*chartData */}) => {
                 axisLine={false}
                 tickFormatter={(value) => value.slice(0, 3)}
                 />
-                <ChartTooltip content={<ChartTooltipContent />} className='bg-dubraPrimary'/>
+                <ChartTooltip content={<ChartTooltipContent />}/>
                 <Bar dataKey="desktop" fill="var(--color-dubraSecondary)" radius={4}/>
                 <Bar dataKey="mobile" fill="var(--color-dubraText)" radius={4} />
             </BarChart>
