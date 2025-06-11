@@ -1,18 +1,16 @@
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@radix-ui/react-navigation-menu";
-import Dashboard from "../dashboard/Dashboard2";
-import { ArrowBigRight, Database, PackageSearch, Phone, User } from 'lucide-react'
-import NavBarButton from "../navbar/NavBarButton";
+import { ArrowBigRight, Database, MapPinHouseIcon, PackageSearch, Phone, User } from 'lucide-react'
 import ResponsiveNavBar from "../navbar/ResponsiveNavBar";
 import { useEffect, useRef, useState } from "react";
 import NavBar from "../navbar/NavBar";
+import { Outlet } from "react-router-dom";
 
-const DashboardPage = () => {
+const AdminDashboardPage = () => {
 
     const fields=[
-      {text: 'DashBoard', link:'/dashboard', icon:<Database/> },
-      {text: 'Gestioná tus Pedidos', link:'/orderManager', icon:<PackageSearch/> },
-      {text: 'Personalizá tu Perfil', link:'/profile', icon:<User/> },
-      {text: 'Ponete en Contacto', link:'/contact', icon:<Phone/> },
+      {text: 'DashBoard', link:'/admin/dashboard', icon:<Database/> },
+      {text: 'Gestioná tus Pedidos', link:'/admin/orderManager', icon:<PackageSearch/> },
+      {text: 'Personalizá tu Perfil', link:'/admin/profile', icon:<User/> },
+      {text: 'Ver Recorrido de Entregas', link:'/admin/map', icon:<MapPinHouseIcon/> },
     ];
   
     const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +53,7 @@ const DashboardPage = () => {
         </div>
 
         <div className='md:col-span-5 max-md:col-span-6 w-full p-5'>
-          <Dashboard/>
+          <Outlet/>
         </div>
       </div>
 
@@ -70,4 +68,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default AdminDashboardPage;

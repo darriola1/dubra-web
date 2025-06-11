@@ -5,7 +5,7 @@ import RecentOrders from './RecentOrders'
 import Chart from '../Chart'
 
 
-const Dashboard = () => {
+const AdminDashboard = () => {
   return (
     <div className='items-center flex flex-col gap-5'>
         <DashboardMetrics/>
@@ -15,7 +15,7 @@ const Dashboard = () => {
           </div>
           
           <div className='max-md:col-span-3 max-2xl:col-span-2 2xl:col-span-1 flex justify-center items-center'>
-            <RecentOrders/>
+            <RecentOrders linkTo={'/admin/orderManager'}/>
           </div>
         </div>
 
@@ -23,4 +23,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default AdminDashboard

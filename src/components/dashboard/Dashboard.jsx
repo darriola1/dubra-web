@@ -14,7 +14,7 @@ const Dashboard = () => {
           </div>
           
           <div className='max-md:col-span-3 max-2xl:col-span-2 2xl:col-span-1 flex justify-center items-center'>
-            <RecentOrders/>
+            <RecentOrders link={'/orderManager'}/>
           </div>
         </div>
 
