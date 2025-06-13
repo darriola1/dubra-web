@@ -8,10 +8,11 @@ import DashboardPage from './components/pages/DashboardPage'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AdminDashboardPage from './components/pages/AdminDashboardPage';
-import Dashboard from './components/dashboard/AdminDashboard';
+import AdminDashboard from './components/dashboard/AdminDashboard';
 import LeafletMap from './components/map/LeafletMap';
 import AdminMapPage from './components/pages/AdminMapPage';
-import PlaceOrderPage from './components/pages/PlaceOrderPage';
+import PlaceOrderForm from './components/PlaceOrderForm';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
   const location = useLocation(); 
@@ -25,11 +26,13 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registrarse" element={<RegisterPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path='/admin' element={<AdminDashboardPage/>}>
+          <Route path="/user" element={<DashboardPage />}> 
             <Route path='dashboard' element={<Dashboard/>}/>
+            <Route path='placeOrder' element={<PlaceOrderForm/>}/>
+          </Route>
+          <Route path='/admin' element={<AdminDashboardPage/>}>
+            <Route path='dashboard' element={<AdminDashboard/>}/>
             <Route path='map' element={<AdminMapPage/>}/>
-            <Route path='orderManager' element={<PlaceOrderPage/>}/>
           </Route>
         </Routes>
       {showFooter && <Footer />}

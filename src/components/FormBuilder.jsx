@@ -7,7 +7,7 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 
-const FormError = ({ errors, name }) =>
+const FormError = ({ errors, name}) =>
   errors[name] ? <p className="text-sm text-red-500 font-bold">{errors[name].message}</p> : null;
 
 export default function FormBuilder({
@@ -19,6 +19,7 @@ export default function FormBuilder({
   onSubmit,
   footer,
   background,
+  children,
   recaptcha
 }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -61,7 +62,7 @@ export default function FormBuilder({
       <CardContent>
         <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col gap-4">
           <div className={`items-end ${fields.length>3?'grid grid-cols-2 gap-3':''}`}>
-            {fields.map(({ name, label, type = 'text', placeholder }, index) => (
+            {fields.map(({ name, label, type = 'text', placeholder, onclick }, index) => (
               <div className={fields.length > 3 && index === fields.length - 1 && fields.length % 2 > 0? 'col-span-2' : ''} key={name}>
                 <Label htmlFor={name} className='text-lg'>{label}</Label>
                 <Input
@@ -70,10 +71,12 @@ export default function FormBuilder({
                   placeholder={placeholder}
                   disabled={isLoading}
                   {...register(name)}
+                  onClick={onclick}
                 />
                 <FormError errors={errors} name={name} />
               </div>
             ))}
+            {children}
           </div>
 
 

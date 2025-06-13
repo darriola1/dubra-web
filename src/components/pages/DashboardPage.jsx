@@ -1,10 +1,8 @@
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@radix-ui/react-navigation-menu";
-import Dashboard from "../dashboard/Dashboard";
 import { ArrowBigRight, Database, PackageSearch, Phone, User } from 'lucide-react'
-import NavBarButton from "../navbar/NavBarButton";
 import ResponsiveNavBar from "../navbar/ResponsiveNavBar";
 import { useEffect, useRef, useState } from "react";
 import NavBar from "../navbar/NavBar";
+import { Outlet } from "react-router-dom";
 
 const DashboardPage = () => {
 
@@ -55,7 +53,7 @@ const DashboardPage = () => {
         </div>
 
         <div className='md:col-span-5 max-md:col-span-6 w-full'>
-          <Dashboard/>
+          <Outlet/>
         </div>
       </div>
 

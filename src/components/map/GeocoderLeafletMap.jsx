@@ -5,11 +5,16 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
 import 'leaflet-control-geocoder';
 import LeafletMap from './LeafletMap';
 
-const [adressValue, setAdressValue] = useState('')
-const [latlngValue, setLatlLngValue] = useState('')
+function GeocoderLeafletMap() {
+  const [addressValue, setAddressValue] = useState('');
+  const [latlngValue, setLatlngValue] = useState(null);
 
+  const handleGeocode = ({ address, latlng }) => {
+    setAddressValue(address);
+    setLatlngValue(latlng);
+  };
 
-function GeocoderControl() {
+function GeocoderControl({ onGeocode }) {
   const map = useMap();
 
   useEffect(() => {
@@ -22,24 +27,32 @@ function GeocoderControl() {
     }).addTo(map);
 
     geocoder.on('markgeocode', function (e) {
-      const adress = e.geocode.name; // geocode input text
-      const latlng = e.geocode.center; // geocode latitude and longitude
+      const address = e.geocode.name;
+      const latlng = e.geocode.center;
 
-      L.marker(latlng).addTo(map).bindPopup(adress).openPopup(); // marker
+      L.marker(latlng).addTo(map).bindPopup(address).openPopup();
       map.setView(latlng, 15);
-      setAdressValue(adress);
-      setLatlLngValue(latlng);
+
+      // Pasar los valores al componente padre
+      onGeocode({ address, latlng });
     });
 
     return () => map.removeControl(geocoder);
-  }, [map]);
+  }, [map, onGeocode]);
 
   return null;
 }
 
-function GeocoderLeafletMap() {
   return (
-    <LeafletMap children={<GeocoderControl/>}/>
+    <>
+      <LeafletMap>
+        <GeocoderControl onGeocode={handleGeocode} />
+      </LeafletMap>
+      <div>
+        <p><strong>Dirección:</strong> {addressValue}</p>
+        <p><strong>LatLng:</strong> {latlngValue ? `${latlngValue.lat}, ${latlngValue.lng}` : ''}</p>
+      </div>
+    </>
   );
 }
 
