@@ -4,8 +4,9 @@ import L from 'leaflet';
 import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
 import 'leaflet-control-geocoder';
 import LeafletMap from './LeafletMap';
+import { Button } from '../ui/button';
 
-function GeocoderLeafletMap() {
+function GeocoderLeafletMap({returnValues}) {
   const [addressValue, setAddressValue] = useState('');
   const [latlngValue, setLatlngValue] = useState(null);
 
@@ -13,6 +14,12 @@ function GeocoderLeafletMap() {
     setAddressValue(address);
     setLatlngValue(latlng);
   };
+
+function handleAddress() {
+  if (addressValue && latlngValue) {
+    returnValues(latlngValue, addressValue); // return values to caller
+  }
+}
 
 function GeocoderControl({ onGeocode }) {
   const map = useMap();
@@ -45,12 +52,17 @@ function GeocoderControl({ onGeocode }) {
 
   return (
     <>
-      <LeafletMap>
+      <LeafletMap> {/*calls the map and sends geocode*/}
         <GeocoderControl onGeocode={handleGeocode} />
       </LeafletMap>
       <div>
         <p><strong>Dirección:</strong> {addressValue}</p>
         <p><strong>LatLng:</strong> {latlngValue ? `${latlngValue.lat}, ${latlngValue.lng}` : ''}</p>
+        <div className='w-full flex justify-center'>
+          <Button className='bg-dubraSecondary' onClick={() => handleAddress()}>
+            Agregar Direccion
+          </Button>
+        </div>
       </div>
     </>
   );

@@ -9,14 +9,13 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import AdminDashboardPage from './components/pages/AdminDashboardPage';
 import AdminDashboard from './components/dashboard/AdminDashboard';
-import LeafletMap from './components/map/LeafletMap';
 import AdminMapPage from './components/pages/AdminMapPage';
-import PlaceOrderForm from './components/PlaceOrderForm';
 import Dashboard from './components/dashboard/Dashboard';
+import PlaceOrderPage from './components/pages/PlaceOrderPage';
 
 function App() {
   const location = useLocation(); 
-  const hideFooterPrefixes = ["/dashboard", "/admin"];
+  const hideFooterPrefixes = ["/user", "/admin"];
   const showFooter = !hideFooterPrefixes.some(prefix => location.pathname.startsWith(prefix));
 
   return (
@@ -28,7 +27,7 @@ function App() {
           <Route path="/registrarse" element={<RegisterPage />} />
           <Route path="/user" element={<DashboardPage />}> 
             <Route path='dashboard' element={<Dashboard/>}/>
-            <Route path='placeOrder' element={<PlaceOrderForm/>}/>
+            <Route path='placeOrder' element={<PlaceOrderPage/>}/>
           </Route>
           <Route path='/admin' element={<AdminDashboardPage/>}>
             <Route path='dashboard' element={<AdminDashboard/>}/>

@@ -7,10 +7,10 @@ import { Outlet } from "react-router-dom";
 const DashboardPage = () => {
 
     const fields=[
-      {text: 'DashBoard', link:'/dashboard', icon:<Database/> },
-      {text: 'Gestioná tus Pedidos', link:'/orderManager', icon:<PackageSearch/> },
-      {text: 'Personalizá tu Perfil', link:'/profile', icon:<User/> },
-      {text: 'Ponete en Contacto', link:'/contact', icon:<Phone/> },
+      {text: 'DashBoard', link:'/user/dashboard', icon:<Database/> },
+      {text: 'Gestioná tus Pedidos', link:'/user/placeOrder', icon:<PackageSearch/> },
+      {text: 'Personalizá tu Perfil', link:'/user/profile', icon:<User/> },
+      {text: 'Ponete en Contacto', link:'/user/contact', icon:<Phone/> },
     ];
 
     const [isOpen, setIsOpen] = useState(false);

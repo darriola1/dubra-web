@@ -3,6 +3,8 @@ import FormBuilder from '../FormBuilder';
 import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL, ROUTES } from '../../lib/constants';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 // Definición de esquema de validacion usando Zod
 //test(val) devuelve true si el texto contiene el patrón buscado por la expresion regular
@@ -53,11 +55,19 @@ export default function RegisterForm() {
     navigate('/dashboard');
   };
 
+  const { setValue, formState: { errors }, control, handleSubmit } = useForm({
+    resolver: zodResolver(schema),
+  });
+  
   return (
     <FormBuilder
       title="Registrarse"
       description="Creá tu cuenta para comenzar a operar"
       background={'bg-dubraPrimary'}
+      setValue={setValue}
+      errors={errors}
+      control={control}
+      handleSubmit={handleSubmit}
       fields={[
         { name: 'name', label: 'Nombre completo', placeholder: 'Juan Pérez' },
         { name: 'email', label: 'Correo electrónico', placeholder: 'nombre@ejemplo.com' },
@@ -65,14 +75,6 @@ export default function RegisterForm() {
         { name: 'password', label: 'Contraseña', type: 'password', placeholder: '******' },
         { name: 'confirmPassword', label: 'Confirmar contraseña', type: 'password', placeholder: '******' },
       ]}
-      schema={schema}
-      defaultValues={{
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        rut: '',
-      }}
       onSubmit={onSubmit}
       footer={
         <p className="text-md text-muted-foreground">

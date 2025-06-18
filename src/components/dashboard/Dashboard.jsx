@@ -1,6 +1,5 @@
 import React from 'react'
 import DashboardMetrics from './DashboardMetrics'
-import OrderForm from '../OrderForm'
 import RecentOrders from './RecentOrders'
 
 
@@ -10,7 +9,7 @@ const Dashboard = () => {
         <DashboardMetrics/>
         <div className='grid grid-cols-3 w-full max-md:gap-5'>
           <div className='max-md:col-span-3 max-2xl:col-span-2 2xl:col-span-1 flex justify-center items-center'>
-            <OrderForm/>
+            
           </div>
           
           <div className='max-md:col-span-3 max-2xl:col-span-2 2xl:col-span-1 flex justify-center items-center'>

@@ -3,6 +3,8 @@ import FormBuilder from '../FormBuilder';
 import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL, ROUTES } from '../../lib/constants';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const schema = z.object({
   email: z.string().min(1, 'El email es obligatorio').email('Email inválido'),
@@ -30,11 +32,19 @@ export default function LoginForm() {
     navigate('/dashboard');
   };
 
+  const { setValue, formState: { errors }, control, handleSubmit } = useForm({
+    resolver: zodResolver(schema),
+  });
+
   return (
     <FormBuilder
       title="Iniciar sesión"
       description="Accedé a tu cuenta para gestionar tus envíos"
       background={'bg-dubraPrimary'}
+      setValue={setValue}
+      errors={errors}
+      control={control}
+      handleSubmit={handleSubmit}
       fields={[
         { name: 'email', label: 'Correo electrónico', type: 'email', placeholder: 'nombre@ejemplo.com' },
         { name: 'password', label: 'Contraseña', type: 'password', placeholder: '******' },
