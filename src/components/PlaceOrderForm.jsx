@@ -32,6 +32,8 @@ const PlaceOrderForm = () => {
 
     const { setValue, formState: { errors }, control, handleSubmit } = useForm({
         resolver: zodResolver(schema),
+        defaultValues: { campos: [""] },
+        mode: "onSubmit",
     });
 
     function setAdressValues(latlng, address){
@@ -63,7 +65,7 @@ const PlaceOrderForm = () => {
                 { name: `pickUpAddress${currentNumber}`,
                 label: `Direccion de Recogida ${currentNumber}`,
                 type: 'text', 
-                placeholder: 'Calle Ejemplo 111',
+                placeholder: 'ej: Calle Ejemplo 111',
                 children: 
                 <div className='flex gap-2'>
                 <button className='bg-dubraSecondary p-1 rounded-sm' onClick={ () => openModal(`pickUpAddress${currentNumber}`) /*REFERENCE */}>
@@ -74,7 +76,7 @@ const PlaceOrderForm = () => {
                 { name: `dropOffAddress${currentNumber}`,
                 label: `Direccion de Entrega ${currentNumber}`,
                 type: 'text', 
-                placeholder: 'Calle Ejemplo 222',
+                placeholder: 'ej: Calle Ejemplo 222',
                 children: 
                     <div className='flex gap-2'>
                         <button className='bg-dubraSecondary p-1 rounded-sm' onClick={ () => openModal(`dropOffAddress${currentNumber}`) /*REFERENCE */}>
@@ -85,6 +87,10 @@ const PlaceOrderForm = () => {
                         </button>
                     </div>
                 }]);
+            
+setValue(`pickUpAddress${currentNumber}`, '', { shouldValidate: false });
+setValue(`dropOffAddress${currentNumber}`, '', { shouldValidate: false });
+
             setNumber(number + 1);
         }
         

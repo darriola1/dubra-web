@@ -1,6 +1,5 @@
 import React from 'react'
 import DashboardMetrics from './DashboardMetrics'
-import OrderForm from '../OrderForm'
 import RecentOrders from './RecentOrders'
 import Chart from '../Chart'
 

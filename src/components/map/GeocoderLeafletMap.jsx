@@ -5,6 +5,7 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
 import 'leaflet-control-geocoder';
 import LeafletMap from './LeafletMap';
 import { Button } from '../ui/button';
+import { API_BASE_URL } from '@/lib/constants';
 
 function GeocoderLeafletMap({returnValues}) {
   const [addressValue, setAddressValue] = useState('');
@@ -28,6 +29,9 @@ function GeocoderControl({ onGeocode }) {
     if (!map || !L.Control.Geocoder) return;
 
     const geocoder = L.Control.geocoder({
+      geocoder: L.Control.Geocoder.nominatim({
+        serviceUrl: `${API_BASE_URL}/geocoder/findAll/`,
+      }),
       collapsed: false,
       defaultMarkGeocode: false,
       placeholder: 'Buscar dirección...',
