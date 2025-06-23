@@ -12,6 +12,8 @@ import AdminDashboard from './components/dashboard/AdminDashboard';
 import AdminMapPage from './components/pages/AdminMapPage';
 import Dashboard from './components/dashboard/Dashboard';
 import PlaceOrderPage from './components/pages/PlaceOrderPage';
+import NewOrderPage from './components/pages/NewOrderPage';
+
 
 function App() {
   const location = useLocation(); 
@@ -28,6 +30,7 @@ function App() {
           <Route path="/user" element={<DashboardPage />}> 
             <Route path='dashboard' element={<Dashboard/>}/>
             <Route path='placeOrder' element={<PlaceOrderPage/>}/>
+            <Route path="newOrder" element={<NewOrderPage />} />
           </Route>
           <Route path='/admin' element={<AdminDashboardPage/>}>
             <Route path='dashboard' element={<AdminDashboard/>}/>

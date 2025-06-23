@@ -1,11 +1,19 @@
-import React from 'react';
-import PlaceOrderForm from '../PlaceOrderForm';
+import React from 'react'
+import HeroSection from '../HeroSection'
+import PlaceOrderForm from '../PlaceOrderForm'
 
-export default function NewShipmentPage() {
+const NewOrderPage = () => {
   return (
-    <div className="flex flex-col items-center p-4">
-      <h1 className="text-2xl font-bold mb-6">Crear Nuevo Envío</h1>
-      <PlaceOrderForm />
+    <div className='h-full'>
+          <HeroSection
+          extraComponent={<PlaceOrderForm/>}
+          background={'bg-gradient-to-br from-dubraText to-dubraPrimary'}
+          customHeight=' h-full '
+          centerContent={true}
+          textColor={'text-dubraPrimary'}
+          />
     </div>
-  );
+  )
 }
+
+export default NewOrderPage
