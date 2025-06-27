@@ -28,7 +28,7 @@ export default function FormBuilder({
   const [recaptchaToken, setRecaptchaToken] = useState(null);
 
   const handleFormSubmit = async (data) => {
-    if (!recaptchaToken) {
+    if (!recaptchaToken && recaptcha) {
       setError('Por favor completá el reCAPTCHA');
       return;
     }

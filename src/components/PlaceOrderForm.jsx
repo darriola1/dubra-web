@@ -68,7 +68,7 @@ const PlaceOrderForm = () => {
                 placeholder: 'ej: Calle Ejemplo 111',
                 children: 
                 <div className='flex gap-2'>
-                <button className='bg-dubraSecondary p-1 rounded-sm' onClick={ () => openModal(`pickUpAddress${currentNumber}`) /*REFERENCE */}>
+                <button type='button' className='bg-dubraSecondary p-1 rounded-sm' onClick={ () => openModal(`pickUpAddress${currentNumber}`) /*REFERENCE */}>
                         <Map/>
                     </button>
                 </div>
@@ -79,17 +79,17 @@ const PlaceOrderForm = () => {
                 placeholder: 'ej: Calle Ejemplo 222',
                 children: 
                     <div className='flex gap-2'>
-                        <button className='bg-dubraSecondary p-1 rounded-sm' onClick={ () => openModal(`dropOffAddress${currentNumber}`) /*REFERENCE */}>
+                        <button type='button' className='bg-dubraSecondary p-1 rounded-sm' onClick={ () => openModal(`dropOffAddress${currentNumber}`) /*REFERENCE */}>
                             <Map/>
                         </button>
-                        <button id={`addAddressButton${currentNumber}`} onClick={() => removeAddressField(currentNumber)}>
+                        <button type='button' id={`addAddressButton${currentNumber}`} onClick={() => removeAddressField(currentNumber)}>
                             <Minus className='bg-red-500 rounded-full'/>  
                         </button>
                     </div>
-                }]);
+                }]); // todo: optimizar
             
-setValue(`pickUpAddress${currentNumber}`, '', { shouldValidate: false });
-setValue(`dropOffAddress${currentNumber}`, '', { shouldValidate: false });
+            setValue(`pickUpAddress${currentNumber}`, '', { shouldValidate: false });
+            setValue(`dropOffAddress${currentNumber}`, '', { shouldValidate: false });
 
             setNumber(number + 1);
         }
@@ -118,7 +118,7 @@ setValue(`dropOffAddress${currentNumber}`, '', { shouldValidate: false });
             <div className=' pt-3 '>
                 
                     <div className='w-full flex justify-center'>
-                        <Button id={'addAddressFields'} onClick={() => editField()} className='bg-dubraSecondary'>
+                        <Button id={'addAddressFields'} onClick={() => editField()} className='bg-dubraSecondary' type='button'>
                             Agregar punto de Entrega.
                         </Button>
                         

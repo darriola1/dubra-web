@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL, ROUTES } from '../../lib/constants';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAuth } from '@/context/AuthContext';
 
 const schema = z.object({
   email: z.string().min(1, 'El email es obligatorio').email('Email inválido'),
@@ -13,7 +14,8 @@ const schema = z.object({
 
 export default function LoginForm() {
   const navigate = useNavigate();
-
+  const { verificarAutenticacion } = useAuth()
+  
   const onSubmit = async (data) => {
     // El token recaptcha lo recibe el FormBuilder y lo pasa acá dentro de data
     const { email, password, recaptchaToken } = data;
@@ -21,15 +23,15 @@ export default function LoginForm() {
     const res = await fetch(`${API_BASE_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ email, password, recaptchaToken }),
     });
-
-    if (!res.ok) {
       const result = await res.json();
+    if (!res.ok) {
       throw new Error(result.error || 'Error al loguear');
     }
-
-    navigate('/dashboard');
+    verificarAutenticacion();
+    navigate('/user/dashboard');
   };
 
   const { setValue, formState: { errors }, control, handleSubmit } = useForm({
