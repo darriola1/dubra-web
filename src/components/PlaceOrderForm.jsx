@@ -14,7 +14,10 @@ const PlaceOrderForm = () => {
         { name: 'RUT', label: 'RUT', type: 'text', placeholder: 'RUT' },
         { name: 'RUT2', label: 'RUT', type: 'text', placeholder: 'RUT' },
     ]); // Setting default values for fields
-
+    const fieldsName = [
+        {name: 'pickUpAddress', label: 'Dirección de Recogida', placeholder:'EJ: CALLE DE EJEMPLO 123', remove: false},
+        {name: 'dropOffAddress', label: 'Dirección de Entrega', placeholder:'EJ: CALLE DE EJEMPLO 123', remove: true}
+    ]
 
     const [isOpen, setIsOpen] = useState(false); // isOpen for ModalPopUp
     const [number, setNumber] = useState(0); // Personalized Id for Fields
@@ -58,7 +61,7 @@ const PlaceOrderForm = () => {
             });
     }
 
-    function editField() { // adds new fields to the form
+    function addFields() { // adds new fields to the form
         const currentNumber = number + 1;
             setFields( 
                 [... fields,
