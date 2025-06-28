@@ -63,38 +63,40 @@ const PlaceOrderForm = () => {
 
     function addFields() { // adds new fields to the form
         const currentNumber = number + 1;
-            setFields( 
-                [... fields,
-                { name: `pickUpAddress${currentNumber}`,
-                label: `Direccion de Recogida ${currentNumber}`,
-                type: 'text', 
-                placeholder: 'ej: Calle Ejemplo 111',
-                children: 
-                <div className='flex gap-2'>
-                <button className='bg-dubraSecondary p-1 rounded-sm' onClick={ () => openModal(`pickUpAddress${currentNumber}`) /*REFERENCE */}>
-                        <Map/>
-                    </button>
-                </div>
-                },
-                { name: `dropOffAddress${currentNumber}`,
-                label: `Direccion de Entrega ${currentNumber}`,
-                type: 'text', 
-                placeholder: 'ej: Calle Ejemplo 222',
-                children: 
+            setFields([
+                ...fields,
+                ...fieldsName.map(field => ({
+                    name: `${field.name}${currentNumber}`,
+                    label: `${field.label} ${currentNumber}`,
+                    type: 'text',
+                    placeholder: `${field.placeholder}${currentNumber}`,
+                    children: (
                     <div className='flex gap-2'>
-                        <button className='bg-dubraSecondary p-1 rounded-sm' onClick={ () => openModal(`dropOffAddress${currentNumber}`) /*REFERENCE */}>
-                            <Map/>
+                        <button
+                        type='button'
+                        className='bg-dubraSecondary p-1 rounded-sm'
+                        onClick={() => openModal(`${field.name}${currentNumber}`)}
+                        >
+                        <Map />
                         </button>
-                        <button id={`addAddressButton${currentNumber}`} onClick={() => removeAddressField(currentNumber)}>
-                            <Minus className='bg-red-500 rounded-full'/>  
-                        </button>
-                    </div>
-                }]);
-            
-setValue(`pickUpAddress${currentNumber}`, '', { shouldValidate: false });
-setValue(`dropOffAddress${currentNumber}`, '', { shouldValidate: false });
 
-            setNumber(number + 1);
+                        {field.remove && (
+                        <button
+                            type='button'
+                            id={`${field.name}${currentNumber}`}
+                            onClick={() => removeAddressField(currentNumber)}
+                        >
+                            <Minus className='bg-red-500 rounded-full' />
+                        </button>
+                        )}
+                    </div>
+                    )
+                }))
+                ]);
+            
+        setValue(`pickUpAddress${currentNumber}`, '', { shouldValidate: false });
+        setValue(`dropOffAddress${currentNumber}`, '', { shouldValidate: false });
+        setNumber(number + 1);
         }
         
 
@@ -121,7 +123,7 @@ setValue(`dropOffAddress${currentNumber}`, '', { shouldValidate: false });
             <div className=' pt-3 '>
                 
                     <div className='w-full flex justify-center'>
-                        <Button id={'addAddressFields'} onClick={() => editField()} className='bg-dubraSecondary'>
+                        <Button id={'addAddressFields'} onClick={() => addFields()} className='bg-dubraSecondary' type='button'>
                             Agregar punto de Entrega.
                         </Button>
                         
