@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react';
 import { NavigationMenu,
         NavigationMenuList,
         NavigationMenuItem,
  } from '../ui/navigation-menu'
-import { AlignJustify, Home, User } from 'lucide-react'
 import NavBarButton from './NavBarButton'
 import { Link } from 'react-router-dom';
-import { Button } from '../ui/button';
 import ResponsiveNavBar from './ResponsiveNavBar';
 import DubraLogo from '../DubraLogo';
+import NavBarExtraButton from './NavBarExtraButton';
 
 
 const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo, className, width}) => {
@@ -37,14 +36,13 @@ const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo, classN
                         {fields.map(({link, text, icon}, index) => (
                             <NavBarButton key={link+index} text={text} link={link} icon={icon && icon}/>
                         ))}
-                        {extraFields && extraFields.map(({link, text, icon,}, index) => (
-                            <Link to={link} key={link+index}>
-                            <Button className='text-base bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold' key={link+index}>
-                                {icon && icon}
-                                {text}
-                                
-                            </Button>
-                        </Link>
+                        {extraFields && extraFields.map(({link, text, icon, onClick}, index) => (
+                            <NavBarExtraButton 
+                            link={link}
+                            text={text.toUpperCase()}
+                            key={link+index}
+                            onClick={onClick}
+                            />
                         ))}
                     </div>
                 </ul>

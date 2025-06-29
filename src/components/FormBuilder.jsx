@@ -21,7 +21,6 @@ export default function FormBuilder({
   recaptcha,
   control,
   handleSubmit,
-  setValue,
   errors
 }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +28,7 @@ export default function FormBuilder({
   const [recaptchaToken, setRecaptchaToken] = useState(null);
 
   const handleFormSubmit = async (data) => {
-    if (!recaptchaToken) {
+    if (!recaptchaToken && recaptcha) {
       setError('Por favor completá el reCAPTCHA');
       return;
     }
@@ -62,7 +61,6 @@ export default function FormBuilder({
                     <Controller
                     name={name}
                     control={control}
-                    defaultValue=""
                     render={({ field }) => (
                       <Input
                         id={name}

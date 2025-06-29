@@ -9,6 +9,7 @@ const ModalPopUp = ({isOpen, children, onClose}) => {
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-dubraPrimary"
+          type='button'
         >
           ✕
         </button>

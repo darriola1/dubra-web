@@ -5,6 +5,7 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
 import 'leaflet-control-geocoder';
 import LeafletMap from './LeafletMap';
 import { Button } from '../ui/button';
+import { API_BASE_URL } from '@/lib/constants';
 
 function GeocoderLeafletMap({returnValues}) {
   const [addressValue, setAddressValue] = useState('');
@@ -28,6 +29,9 @@ function GeocoderControl({ onGeocode }) {
     if (!map || !L.Control.Geocoder) return;
 
     const geocoder = L.Control.geocoder({
+      geocoder: L.Control.Geocoder.nominatim({
+        serviceUrl: `${API_BASE_URL}/geocoder/findAll/`,
+      }),
       collapsed: false,
       defaultMarkGeocode: false,
       placeholder: 'Buscar dirección...',
@@ -59,7 +63,7 @@ function GeocoderControl({ onGeocode }) {
         <p><strong>Dirección:</strong> {addressValue}</p>
         <p><strong>LatLng:</strong> {latlngValue ? `${latlngValue.lat}, ${latlngValue.lng}` : ''}</p>
         <div className='w-full flex justify-center'>
-          <Button className='bg-dubraSecondary' onClick={() => handleAddress()}>
+          <Button className='bg-dubraSecondary' onClick={() => handleAddress()} type='button'>
             Agregar Direccion
           </Button>
         </div>

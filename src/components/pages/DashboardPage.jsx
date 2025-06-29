@@ -62,7 +62,6 @@ const DashboardPage = () => {
           <ArrowBigRight/>
         </div>
       </div>
-          {/* todo: showing and hiding DASHBOARD PAGE NAVIGATION MENU */}
       </section>
     </div>
   );
