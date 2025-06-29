@@ -63,7 +63,7 @@ function GeocoderControl({ onGeocode }) {
         <p><strong>Dirección:</strong> {addressValue}</p>
         <p><strong>LatLng:</strong> {latlngValue ? `${latlngValue.lat}, ${latlngValue.lng}` : ''}</p>
         <div className='w-full flex justify-center'>
-          <Button className='bg-dubraSecondary' onClick={() => handleAddress()}>
+          <Button className='bg-dubraSecondary' onClick={() => handleAddress()} type='button'>
             Agregar Direccion
           </Button>
         </div>

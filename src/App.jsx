@@ -14,6 +14,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import PlaceOrderPage from './components/pages/PlaceOrderPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
+import ProfilePage from './components/pages/ProfilePage';
 
 function App() {
   const location = useLocation(); 
@@ -34,8 +35,9 @@ function App() {
               </ProtectedRoute>}>
                 <Route path='dashboard' element={<Dashboard/>}/>
                 <Route path='placeOrder' element={<PlaceOrderPage/>}/>
+                <Route path='profile' element={<ProfilePage/>}/>
               </Route>
-            <Route path='/admin' element={<AdminDashboardPage/>}>
+            <Route path='/admin' element={<ProtectedRoute><AdminDashboardPage/></ProtectedRoute>}>
               <Route path='dashboard' element={<AdminDashboard/>}/>
               <Route path='map' element={<AdminMapPage/>}/>
             </Route>

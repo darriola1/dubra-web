@@ -31,14 +31,15 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try{
-      const res = await fetch(`${API_BASE_URL}/users/logout`, {
+      const res = await fetch(`${API_BASE_URL}/auth/logout`, {
+        method: 'Post',
         credentials: 'include',
       });
       if(res.ok){
         setUser(null);
       }
     } catch (err){
-      setLoading(false);
+        setLoading(false);
     }
     
     
