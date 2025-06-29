@@ -37,7 +37,7 @@ function App() {
                 <Route path='placeOrder' element={<PlaceOrderPage/>}/>
                 <Route path='profile' element={<ProfilePage/>}/>
               </Route>
-            <Route path='/admin' element={<AdminDashboardPage/>}>
+            <Route path='/admin' element={<ProtectedRoute><AdminDashboardPage/></ProtectedRoute>}>
               <Route path='dashboard' element={<AdminDashboard/>}/>
               <Route path='map' element={<AdminMapPage/>}/>
             </Route>
