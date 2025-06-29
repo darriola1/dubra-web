@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
 
   const verificarAutenticacion = async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/users/me/`, {
+      const res = await fetch(`${API_BASE_URL}/auth/me`, {
         credentials: "include",
       });
       if (res.ok) {

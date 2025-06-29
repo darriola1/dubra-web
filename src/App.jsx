@@ -15,6 +15,7 @@ import PlaceOrderPage from './components/pages/PlaceOrderPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import ProfilePage from './components/pages/ProfilePage';
+import NewOrderPage from './components/pages/NewOrderPage';
 
 function App() {
   const location = useLocation(); 
@@ -36,6 +37,7 @@ function App() {
                 <Route path='dashboard' element={<Dashboard/>}/>
                 <Route path='placeOrder' element={<PlaceOrderPage/>}/>
                 <Route path='profile' element={<ProfilePage/>}/>
+                <Route path='newOrder' element={<NewOrderPage/>}/>
               </Route>
             <Route path='/admin' element={<ProtectedRoute><AdminDashboardPage/></ProtectedRoute>}>
               <Route path='dashboard' element={<AdminDashboard/>}/>

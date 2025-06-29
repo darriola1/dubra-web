@@ -164,14 +164,14 @@ export default function PlaceOrderPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {shipments.length === 0 ? (
+                {shipments && shipments.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={8} className="text-center">
                       No hay resultados para mostrar.
                     </TableCell>
                   </TableRow>
                 ) : (
-                  shipments.map((shipment) => (
+                  shipments && shipments.map((shipment) => (
                     <ShipmentRow key={shipment.id} shipment={shipment} />
                   ))
                 )}

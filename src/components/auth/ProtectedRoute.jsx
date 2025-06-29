@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 const ProtectedRoute = ({ children }) => {
 
 async function verificarAutenticacion() {
-  const response = await fetch(`${API_BASE_URL}/users/me/`, {
+  const response = await fetch(`${API_BASE_URL}/auth/me/`, {
     credentials: "include",
   });
   console.log(response)
