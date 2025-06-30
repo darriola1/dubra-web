@@ -28,31 +28,56 @@ function GeocoderControl({ onGeocode }) {
   useEffect(() => {
     if (!map || !L.Control.Geocoder) return;
 
+    const customGeocoder = {
+      geocode: async function (query, context) {
+        try {
+          console.log('hola masca pitos')
+          const res = await fetch(
+            `${API_BASE_URL}/geocoder/findAll/search?q=${encodeURIComponent(query)}`
+          );
+          console.log('hola crack', res)
+          if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
+
+          const data = await res.json();
+
+          const results = data.map((item) => ({
+            name: item.display_name,
+            center: L.latLng(item.lat, item.lon),
+            bbox: L.latLngBounds(
+              L.latLng(item.boundingbox[0], item.boundingbox[2]),
+              L.latLng(item.boundingbox[1], item.boundingbox[3])
+            ),
+          }));
+          return (context, results);
+        } catch (err) {
+          console.error('Error de geocodificación:', err);
+          return []
+        }
+      }
+    };
+
     const geocoder = L.Control.geocoder({
-      geocoder: L.Control.Geocoder.nominatim({
-        serviceUrl: `${API_BASE_URL}/geocoder/findAll/`,
-      }),
-      collapsed: false,
+      geocoder: customGeocoder,
       defaultMarkGeocode: false,
+      collapsed: false,
       placeholder: 'Buscar dirección...',
-    }).addTo(map);
+    })
+      .on('markgeocode', function (e) {
+        const center = e.geocode.center;
+        map.setView(center, 16);
+        L.marker(center).addTo(map);
+        if (onGeocode) onGeocode(e.geocode);
+      })
+      .addTo(map);
 
-    geocoder.on('markgeocode', function (e) {
-      const address = e.geocode.name;
-      const latlng = e.geocode.center;
-
-      L.marker(latlng).addTo(map).bindPopup(address).openPopup();
-      map.setView(latlng, 15);
-
-      // Pasar los valores al componente padre
-      onGeocode({ address, latlng });
-    });
-
-    return () => map.removeControl(geocoder);
+    return () => {
+      map.removeControl(geocoder);
+    };
   }, [map, onGeocode]);
 
   return null;
 }
+
 
   return (
     <>

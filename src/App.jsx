@@ -30,7 +30,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registrarse" element={<RegisterPage />} />
-              <Route path="/user"
+            <Route path="/user"
               element={<ProtectedRoute>
               <DashboardPage />
               </ProtectedRoute>}>
@@ -39,9 +39,12 @@ function App() {
                 <Route path='profile' element={<ProfilePage/>}/>
                 <Route path='newOrder' element={<NewOrderPage/>}/>
               </Route>
-            <Route path='/admin' element={<ProtectedRoute><AdminDashboardPage/></ProtectedRoute>}>
-              <Route path='dashboard' element={<AdminDashboard/>}/>
-              <Route path='map' element={<AdminMapPage/>}/>
+            <Route path='/admin'
+              element={<ProtectedRoute>
+              <AdminDashboardPage/>
+              </ProtectedRoute>}>
+                <Route path='dashboard' element={<AdminDashboard/>}/>
+                <Route path='map' element={<AdminMapPage/>}/>
             </Route>
           </Routes>
         {showFooter && <Footer />}

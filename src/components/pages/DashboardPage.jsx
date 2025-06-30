@@ -1,4 +1,4 @@
-import { ArrowBigRight, Database, PackageSearch, Phone, User } from 'lucide-react'
+import { ArrowBigRight, Database, PackagePlus, PackageSearch, Phone, User } from 'lucide-react'
 import ResponsiveNavBar from "../navbar/ResponsiveNavBar";
 import { useEffect, useRef, useState } from "react";
 import NavBar from "../navbar/NavBar";
@@ -9,6 +9,7 @@ const DashboardPage = () => {
     const fields=[
       {text: 'DashBoard', link:'/user/dashboard', icon:<Database/> },
       {text: 'Gestioná tus Pedidos', link:'/user/placeOrder', icon:<PackageSearch/> },
+      {text: 'Creá una nueva Orden', link:'/user/newOrder', icon:<PackagePlus/>},
       {text: 'Personalizá tu Perfil', link:'/user/profile', icon:<User/> },
       {text: 'Ponete en Contacto', link:'/user/contact', icon:<Phone/> },
     ];
