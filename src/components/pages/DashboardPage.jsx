@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 const DashboardPage = () => {
 
     const fields=[
-      {text: 'DashBoard', link:'/user/dashboard', icon:<Database/> },
+      {text: 'Panel de Control', link:'/user/dashboard', icon:<Database/> },
       {text: 'Gestioná tus Pedidos', link:'/user/placeOrder', icon:<PackageSearch/> },
       {text: 'Creá una nueva Orden', link:'/user/newOrder', icon:<PackagePlus/>},
       {text: 'Personalizá tu Perfil', link:'/user/profile', icon:<User/> },
@@ -32,7 +32,7 @@ const DashboardPage = () => {
   //POR EL MOMENTO PAGINA DE PRUEBA PARA QUE REDIGIRA A ALGUN LADO CON LOGIN Y REGISTER
   return (
     <div>
-      <section className="bg-dubraText min-h-screen flex pt-25">
+      <section className="bg-dubraGradient min-h-screen flex pt-25">
         
       <div className='grid grid-cols-6 w-full '>
         

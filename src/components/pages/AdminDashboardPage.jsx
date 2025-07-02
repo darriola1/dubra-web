@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 const AdminDashboardPage = () => {
 
     const fields=[
-      {text: 'DashBoard', link:'/admin/dashboard', icon:<Database/> },
+      {text: 'Panel de Control', link:'/admin/dashboard', icon:<Database/> },
       {text: 'Gestioná tus Pedidos', link:'/admin/orderManager', icon:<PackageSearch/> },
       {text: 'Personalizá tu Perfil', link:'/admin/profile', icon:<User/> },
       {text: 'Ver Recorrido de Entregas', link:'/admin/map', icon:<MapPinHouseIcon/> },
@@ -31,7 +31,7 @@ const AdminDashboardPage = () => {
   //POR EL MOMENTO PAGINA DE PRUEBA PARA QUE REDIGIRA A ALGUN LADO CON LOGIN Y REGISTER
   return (
     <div>
-      <section className="bg-dubraText min-h-screen flex pt-25">
+      <section className="bg-dubraGradient min-h-screen flex pt-25">
         
       <div className='grid grid-cols-6 w-full '>
         

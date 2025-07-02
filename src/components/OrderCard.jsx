@@ -13,10 +13,10 @@ const OrderCard = ({orderId, userName, createdAt, shippingsAmount, orderStatus, 
             <CardDescription className='text-base'>Creada: {createdAt}</CardDescription>
           </div>
         </CardHeader>
-        <CardContent className="text-start mt-[-1rem] text-lg">
-            <p>Creado por: {userName}</p>
-            <p>Estado de la orden: {orderStatus}</p>
-            <p>Cantidad de paradas: {shippingsAmount}</p>
+        <CardContent className="text-start mt-[-1rem] text-lg flex flex-col gap-2 font-semibold">
+            <p className='bg-dubraPrimary px-2 py-1 rounded-2xl'>Creado por: {userName}</p>
+            <p className='bg-dubraPrimary px-2 py-1 rounded-2xl'>Estado de la orden: {orderStatus}</p>
+            <p className='bg-dubraPrimary px-2 py-1 rounded-2xl'>Cantidad de paradas: {shippingsAmount}</p>
         </CardContent>
     </Card>
   )

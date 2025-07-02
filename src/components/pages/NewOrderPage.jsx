@@ -7,7 +7,6 @@ const NewOrderPage = () => {
     <div className='h-full'>
           <HeroSection
           extraComponent={<PlaceOrderForm/>}
-          background={'bg-gradient-to-br from-dubraText to-dubraPrimary'}
           customHeight=' h-full '
           centerContent={true}
           textColor={'text-dubraPrimary'}

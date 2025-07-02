@@ -37,7 +37,7 @@ const HistoryCard = () => {
 
   return (
     <div className='w-10/12 bg-dubraPrimary rounded-xl p-6'>
-        <h1 className='flex text-5xl items-center border-b mb-5 border-dubraText/25'> <History className='h-10 w-10'/> Historial</h1>
+        <h1 className='flex text-5xl items-center border-b mb-5 border-dubraText/25'> <History className='h-10 w-10'/> <p className='ps-3'>Historial</p></h1>
         <div className='grid min-xl:grid-cols-3 max-xl:grid-cols-2 max-md:grid-cols-1  w-full gap-3'>
             {OrdersArray.map(order => (
             <OrderCard
