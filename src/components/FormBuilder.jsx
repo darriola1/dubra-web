@@ -54,9 +54,9 @@ export default function FormBuilder({
       <CardContent>
         <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col gap-4">
           <div className={`items-end ${fields.length>3?'grid grid-cols-2 gap-3':''}`}>
-            {fields.map(({ name, label, type = 'text', placeholder, children }, index) => (
+            {fields.map(({ name, label, type = 'text', placeholder, children, value }, index) => (
               <div className={fields.length > 3 && index === fields.length - 1 && fields.length % 2 > 0? 'col-span-2' : ''} key={name}>
-                <Label htmlFor={name} className='text-lg'>{label}</Label>
+                {type == 'hidden'? null : <Label htmlFor={name} className='text-lg'>{label}</Label>}
                 <div className='flex gap-2 items-center'>
                     <Controller
                     name={name}
@@ -67,6 +67,7 @@ export default function FormBuilder({
                         type={type}
                         placeholder={placeholder}
                         disabled={isLoading}
+                        value = {value? value : ''}
                         {...field}
                       />
                     )}

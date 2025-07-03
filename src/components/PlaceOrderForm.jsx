@@ -7,12 +7,13 @@ import { Map, Minus } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAuth } from '@/context/AuthContext';
 
 const PlaceOrderForm = () => {
-
+    const {user} = useAuth() 
     const [fields, setFields] = useState([
-        { name: 'RUT', label: 'RUT', type: 'text', placeholder: 'RUT' },
-        { name: 'RUT2', label: 'RUT', type: 'text', placeholder: 'RUT' },
+        { name: 'RUTa', label: 'RUT', type: 'text', placeholder: 'RUT' },
+        { name: 'RUT', label: 'RUT', type: 'hidden', placeholder: 'RUT', value: user },
     ]); // Setting default values for fields
     const fieldsName = [
         {name: 'pickUpAddress', label: 'Dirección de Recogida', placeholder:'EJ: CALLE DE EJEMPLO 123', remove: false},
@@ -54,11 +55,11 @@ const PlaceOrderForm = () => {
     function removeAddressField(fieldNumber){
             setFields(prevFields => {
             // prevFields is ALWAYS the latest version
-            return prevFields.filter(field =>
-                field.name !== `pickUpAddress${fieldNumber}` &&
-                field.name !== `dropOffAddress${fieldNumber}`
-            );
-            });
+                return prevFields.filter(field =>
+                    field.name !== `pickUpAddress${fieldNumber}` &&
+                    field.name !== `dropOffAddress${fieldNumber}`
+                    );
+                });
     }
 
     function addFields() { // adds new fields to the form
@@ -121,15 +122,12 @@ const PlaceOrderForm = () => {
 
             </div>
             <div className=' pt-3 '>
-                
                     <div className='w-full flex justify-center'>
                         <Button id={'addAddressFields'} onClick={() => addFields()} className='bg-dubraSecondary' type='button'>
                             Agregar punto de Entrega.
                         </Button>
-                        
                     </div>
                     <div className="w-full h-px mt-3 bg-dubraText/30"></div>
-                    
             </div>
         </div>
         }
