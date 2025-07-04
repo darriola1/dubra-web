@@ -16,6 +16,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import ProfilePage from './components/pages/ProfilePage';
 import NewOrderPage from './components/pages/NewOrderPage';
+import ContactUsForm from './components/ContactUsForm';
 
 function App() {
   const location = useLocation(); 
@@ -33,11 +34,12 @@ function App() {
             <Route path="/user"
               element={<ProtectedRoute>
               <DashboardPage />
-              </ProtectedRoute>}>
+              </ProtectedRoute>}> 
                 <Route path='dashboard' element={<Dashboard/>}/>
                 <Route path='placeOrder' element={<PlaceOrderPage/>}/>
                 <Route path='profile' element={<ProfilePage/>}/>
                 <Route path='newOrder' element={<NewOrderPage/>}/>
+                <Route path='contact' element={<ContactUsForm/>}/>
               </Route>
             <Route path='/admin'
               element={<ProtectedRoute>
