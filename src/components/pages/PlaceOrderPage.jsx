@@ -68,7 +68,7 @@ export default function PlaceOrderPage() {
         offset: offset.toString(),
       });
 
-      const res = await fetch(`${API_BASE_URL}/shippings?${query.toString()}`, {
+      const res = await fetch(`${API_BASE_URL}/shipping?${query.toString()}`, {
         method: 'GET',
         credentials: 'include',
       });

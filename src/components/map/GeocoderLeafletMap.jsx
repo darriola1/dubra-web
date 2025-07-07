@@ -31,7 +31,6 @@ function GeocoderControl({ onGeocode }) {
     const customGeocoder = {
       geocode: async function (query, context) {
         try {
-          console.log('hola masca pitos')
           const res = await fetch(
             `${API_BASE_URL}/geocoder/findAll/search?q=${encodeURIComponent(query)}`
           );
