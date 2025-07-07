@@ -4,6 +4,9 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { API_BASE_URL } from '@/lib/constants'
+import { useAuth } from '@/context/AuthContext'
+import { Navigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const ContactUsForm = () => {
 
@@ -20,12 +23,19 @@ const ContactUsForm = () => {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
             body: JSON.stringify({ email, body, subject }),
-        });
-        const result = await res.json();
-        console.log(res)
-        if (!res.ok) {
-        throw new Error(result.error || 'Error al enviar');
-        } // Add toastify to ensure the 200 status.
+        }).then(response => {
+            if (response.status == 401){
+                const {setUserNull} = useAuth();
+                setUserNull();
+                Navigate('/login')
+            }
+            if(!response.ok){
+                throw new Error(response.error || 'Error al enviar');
+            }
+            if (response.status == 200){
+                toast.success('Email enviado correctamente!')
+            }
+        })
     };
 
     const fields = [

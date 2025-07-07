@@ -17,6 +17,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProfilePage from './components/pages/ProfilePage';
 import NewOrderPage from './components/pages/NewOrderPage';
 import ContactUsForm from './components/ContactUsForm';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const location = useLocation(); 
@@ -51,6 +52,7 @@ function App() {
           </Routes>
         {showFooter && <Footer />}
       </AuthProvider>
+      <ToastContainer/>
     </>
   )
 }
