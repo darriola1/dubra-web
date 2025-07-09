@@ -8,7 +8,6 @@ async function verificarAutenticacion() {
   const response = await fetch(`${API_BASE_URL}/auth/me/`, {
     credentials: "include",
   });
-  console.log(response)
   return response.ok;
 }
 

@@ -34,7 +34,6 @@ function GeocoderControl({ onGeocode }) {
           const res = await fetch(
             `${API_BASE_URL}/geocoder/findAll/search?q=${encodeURIComponent(query)}`
           );
-          console.log('hola crack', res)
           if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
 
           const data = await res.json();

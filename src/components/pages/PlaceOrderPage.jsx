@@ -40,9 +40,6 @@ const ShipmentRow = ({ shipment }) => {
         </Badge>
       </TableCell>
       <TableCell>
-        <div className="font-medium">$1,000</div>
-      </TableCell>
-      <TableCell>
         {/* ver que acciones queremos ponerle eliminar editar o lo que sea */}
       </TableCell>
     </TableRow>
@@ -92,7 +89,7 @@ export default function PlaceOrderPage() {
   }, [searchTerm, statusFilter, offset, limit]);
 
   return (
-    <div className="items-center flex flex-col gap-8">
+    <div className="items-center flex flex-col gap-8 max-w-fit mx-auto">
       <div className="flex flex-col gap-4 p-4 max-w-7xl mx-auto w-full">
         <Card>
           <CardHeader>
@@ -141,7 +138,6 @@ export default function PlaceOrderPage() {
                   <TableHead className="font-bold">Recogida</TableHead>
                   <TableHead className="font-bold">Entrega</TableHead>
                   <TableHead className="font-bold">Estado</TableHead>
-                  <TableHead className="font-bold">Valor</TableHead>
                   <TableHead className="font-bold">Acciones</TableHead>
                 </TableRow>
               </TableHeader>
