@@ -89,9 +89,11 @@ export default function PlaceOrderPage() {
   }, [searchTerm, statusFilter, offset, limit]);
 
   return (
-    <div className="items-center flex flex-col gap-8 max-w-fit mx-auto">
+    //todo: use HeroSection
+    //todo: change name to 'OrderManagementPage'
+    <div className="items-center justify-center flex flex-col gap-8 max-w-fit h-full mx-auto"> 
       <div className="flex flex-col gap-4 p-4 max-w-7xl mx-auto w-full">
-        <Card>
+        <Card className={'bg-dubraPrimary'}>
           <CardHeader>
             <CardTitle>Filtros</CardTitle>
           </CardHeader>
@@ -123,7 +125,7 @@ export default function PlaceOrderPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className={' bg-dubraPrimary'}>
           <CardHeader>
             <CardTitle>Lista de Envíos</CardTitle>
             <CardDescription>Todos tus envíos para que puedas buscar y filtrar fácilmente</CardDescription>

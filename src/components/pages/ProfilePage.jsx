@@ -8,7 +8,6 @@ const ProfilePage = () => {
     <div className='h-full'>
         <HeroSection
           extraComponent={<div className='flex w-full flex-col items-center justify-center gap-2'><ProfileCard/> <HistoryCard/></div>}
-          background={'bg-gradient-to-br from-dubraText to-dubraPrimary'}
           customHeight=' h-full '
           centerContent={false}
           textColor={'text-dubraPrimary'}/>

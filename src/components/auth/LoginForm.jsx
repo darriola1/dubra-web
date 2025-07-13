@@ -31,7 +31,7 @@ export default function LoginForm() {
       throw new Error(result.error || 'Error al loguear');
     }
     verificarAutenticacion();
-    navigate('/user/dashboard');
+    navigate(ROUTES.USERDASHBOARD);
   };
 
   const { setValue, formState: { errors }, control, handleSubmit } = useForm({

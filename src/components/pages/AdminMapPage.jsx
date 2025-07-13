@@ -3,6 +3,7 @@ import LeafletMap from '../map/LeafletMap'
 
 const AdminMapPage = () => {
   return (
+    //todo: use HeroSection
     // todo: responsive
     <div className='flex h-full w-full'>
         <div className='w-5/6 h-full'>

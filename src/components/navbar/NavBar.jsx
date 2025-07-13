@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import ResponsiveNavBar from './ResponsiveNavBar';
 import DubraLogo from '../DubraLogo';
 import NavBarExtraButton from './NavBarExtraButton';
+import { ROUTES } from '@/lib/constants';
 
 
 const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo, className, width}) => {
@@ -20,7 +21,7 @@ const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo, classN
             {Logo && 
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    <Link to='/'>
+                    <Link to={ROUTES.HOME}>
                         <DubraLogo className={'w-70 h-22 pe-10 object-contain'}/>
                     </Link>
                 </NavigationMenuItem>
