@@ -32,9 +32,9 @@ const AdminDashboardPage = () => {
   
   return (
     <div>
-      <section className="bg-dubraGradient min-h-screen flex pt-25" id='adminDashboard'> 
+      <section className="bg-dubraGradient h-screen flex pt-25 overflow-hidden flex-1" id='adminDashboard'> 
         
-      <div className='grid grid-cols-6 w-full '>
+      <div className='flex w-full '>
         
         <ResponsiveNavBar
         fields={fields}
@@ -42,7 +42,7 @@ const AdminDashboardPage = () => {
           className={`justify-start ${isOpen ? 'opacity-100 visible bg-black/50' : 'opacity-0 invisible'} `}
           Logo={true}/>
 
-        <div className='sm:col-span-1 bg-dubraPrimary max-md:hidden'>
+        <div className='sm:w-1/5 bg-dubraPrimary max-md:hidden'>
 
           <NavBar
           fields={fields}
@@ -53,9 +53,9 @@ const AdminDashboardPage = () => {
           
         </div>
 
-        <div className='md:col-span-5 max-md:col-span-6 w-full p-5'>
+        <main className='flex-1 w-full overflow-y-auto p-6'>
           <Outlet/>
-        </div>
+        </main>
       </div>
 
       <div className="fixed h-full flex items-center pb-25">
