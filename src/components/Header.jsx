@@ -29,14 +29,14 @@ const Header = () => {
   
 
   const extraFields = [
-    user ? {text: 'Programá tu envío', link: '/user/placeOrder', icon:<Truck/>} : {text: 'Programá tu envío', link: '/login', icon:<Truck/>},
+    user ? {text: 'Programá tu envío', link: `/${user?.role}/placeOrder`, icon:<Truck/>} : {text: 'Programá tu envío', link: '/login', icon:<Truck/>},
     !user && {text: 'Iniciá Sesión', link: '/login', icon:<User2/>},
     user && {text: 'Cerrar Sesión', link: '/', icon:<DoorOpen/>, onClick: () => HandleLogOut()},
   ].filter(Boolean);
 
   const fields = [
     { text: 'Inicio', link: '/', icon:<Home/> },
-    user && { text: 'Dashboard', link: '/user/dashboard', icon:<Database/> },
+    user && { text: 'Panel de Control', link: `/${user?.role}/dashboard`, icon:<Database/> },
   ].filter(Boolean);
 
   return (

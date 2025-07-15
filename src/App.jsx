@@ -11,7 +11,10 @@ import AdminDashboardPage from './components/pages/AdminDashboardPage';
 import AdminDashboard from './components/dashboard/AdminDashboard';
 import AdminMapPage from './components/pages/AdminMapPage';
 import Dashboard from './components/dashboard/Dashboard';
-import PlaceOrderPage from './components/pages/PlaceOrderPage';
+import AdminPlaceOrderPage from './components/pages/AdminPlaceOrderPage';
+import UserPlaceOrderPage from './components/pages/UserPlaceOrderPage'
+import AdminAdministrationPanel from './components/pages/AdminAdministrationPanel';
+import UserAdministrationPanel from './components/pages/UserAdministrationPanel';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import ProfilePage from './components/pages/ProfilePage';
@@ -35,7 +38,8 @@ function App() {
               <DashboardPage />
               </ProtectedRoute>}>
                 <Route path='dashboard' element={<Dashboard/>}/>
-                <Route path='placeOrder' element={<PlaceOrderPage/>}/>
+                <Route path='placeOrder' element={<UserPlaceOrderPage/>}/>
+                <Route path='administrationPanel' element={<UserAdministrationPanel/>}/>
                 <Route path='profile' element={<ProfilePage/>}/>
                 <Route path='newOrder' element={<NewOrderPage/>}/>
               </Route>
@@ -44,6 +48,8 @@ function App() {
               <AdminDashboardPage/>
               </ProtectedRoute>}>
                 <Route path='dashboard' element={<AdminDashboard/>}/>
+                <Route path='administrationPanel' element={<AdminAdministrationPanel/>}/>
+                <Route path='placeOrder' element={<AdminPlaceOrderPage/>}/>
                 <Route path='map' element={<AdminMapPage/>}/>
             </Route>
           </Routes>
