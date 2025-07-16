@@ -23,6 +23,10 @@
     @apply bg-dubraWhite text-dubraPrimary;
   }
 
+  .bg-dubraGradient{
+    @apply bg-gradient-to-br from-dubraText to-dubraPrimary
+  }
+
 }
 
 @theme {
