@@ -8,23 +8,26 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const verificarAutenticacion = async () => {
-    try {
-      const res = await fetch(`${API_BASE_URL}/auth/me`, {
-        credentials: "include",
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data.user);
-      } else {
-        setUser(null);
-      }
-    } catch (err) {
+const verificarAutenticacion = async () => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/auth/me`, {
+      credentials: "include",
+    });
+    if (res.ok) {
+      const data = await res.json();
+      setUser(data.user);
+      return data.user;
+    } else {
       setUser(null);
-    } finally {
-      setLoading(false);
+      return null;
     }
-  };
+  } catch (err) {
+    setUser(null);
+    return null;
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     verificarAutenticacion();

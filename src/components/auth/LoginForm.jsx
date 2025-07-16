@@ -1,7 +1,7 @@
 import React from 'react';
 import FormBuilder from '../FormBuilder';
 import { z } from 'zod';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL, ROUTES } from '../../lib/constants';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,27 +15,38 @@ const schema = z.object({
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const { verificarAutenticacion } = useAuth()
-  
+  const { user, verificarAutenticacion } = useAuth()
+
   const onSubmit = async (data) => {
-    // El token recaptcha lo recibe el FormBuilder y lo pasa acá dentro de data
     const { email, password, recaptchaToken } = data;
 
-    const res = await fetch(`${API_BASE_URL}/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ email, password, recaptchaToken }),
-    }).then(response => {
-        if(!response.ok){
-          throw new Error(response.error || 'Error al enviar');
-        }
-        if (response.status == 200){
-          toast.success('Inicio de sesión correcto!')
-          verificarAutenticacion();
-          navigate(ROUTES.USERDASHBOARD);
-        }
-    })
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email, password, recaptchaToken }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || 'Error al iniciar sesión');
+      }
+
+      toast.success('Inicio de sesión correcto!');
+
+      // ✅ Esperar a que verificarAutenticacion retorne el nuevo user
+      const newUser = await verificarAutenticacion();
+
+      if (newUser?.role) {
+        navigate(`/${newUser.role}/dashboard`);
+      } else {
+        toast.error("Rol de usuario no encontrado.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message || 'Ocurrió un error inesperado');
+    }
   };
 
   const { setValue, formState: { errors }, control, handleSubmit } = useForm({

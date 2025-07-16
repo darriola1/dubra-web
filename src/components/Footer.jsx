@@ -26,7 +26,7 @@ const Footer = () => {
                 <NavigationMenuList className='flex-col items-start'>
                     <NavBarButton text={'Inicio'} link={ROUTES.HOME}/>
                     <NavBarButton text={'Sobre Nosotros'} link={ROUTES.ABOUTUS}/>
-                    <NavBarButton text={'Programar un envio'} link={user ? ROUTES.USERDASHBOARD : ROUTES.LOGIN}/>
+                    <NavBarButton text={'Programar un envio'} link={user ? `/${user?.role}/dashboard` : ROUTES.LOGIN}/>
                 </NavigationMenuList>
             </NavigationMenu>
             

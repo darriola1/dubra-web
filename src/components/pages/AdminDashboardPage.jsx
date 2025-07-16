@@ -1,18 +1,21 @@
-import { ArrowBigRight, Database, MapPinHouseIcon, PackageSearch, Phone, User } from 'lucide-react'
+import { ArrowBigRight, Database, MapPinHouseIcon, PackageSearch, FileSliders, User } from 'lucide-react'
 import ResponsiveNavBar from "../navbar/ResponsiveNavBar";
 import { useEffect, useRef, useState } from "react";
 import NavBar from "../navbar/NavBar";
 import { Outlet } from "react-router-dom";
-import { ROUTES } from '@/lib/constants';
+import { useAuth } from '@/context/AuthContext'
 
 const AdminDashboardPage = () => {
+    const { user } = useAuth();
 
     const fields=[
-      {text: 'Panel de Control', link: ROUTES.ADMINDASHBOARD, icon:<Database/> },
-      {text: 'Gestioná tus Pedidos', link:'/admin/orderManager', icon:<PackageSearch/> },
-      {text: 'Personalizá tu Perfil', link:'/admin/profile', icon:<User/> },
-      {text: 'Ver Recorrido de Entregas', link: ROUTES.ADMINMAP, icon:<MapPinHouseIcon/> },
+      {text: 'Panel de Control', link:`/${user?.role}/dashboard`, icon:<Database/> },
+      {text: 'Gestioná tus Pedidos', link:`/${user?.role}/placeOrder`, icon:<PackageSearch/> },
+      {text: 'Panel administrativo', link:`/${user?.role}/administrationPanel`, icon:<FileSliders/>},
+      {text: 'Personalizá tu Perfil', link:`/${user?.role}/profile`, icon:<User/> },
+      {text: 'Ver Recorrido de Entregas', link:`/${user?.role}/map`, icon:<MapPinHouseIcon/> },
     ];
+  
   
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);

@@ -1,19 +1,21 @@
-import { ArrowBigRight, Database, PackagePlus, PackageSearch, Phone, User } from 'lucide-react'
+import { ArrowBigRight, Database, PackagePlus, PackageSearch, Phone, User, FileSliders } from 'lucide-react'
 import ResponsiveNavBar from "../navbar/ResponsiveNavBar";
 import { useEffect, useRef, useState } from "react";
 import NavBar from "../navbar/NavBar";
 import { Outlet } from "react-router-dom";
-import { ROUTES } from '@/lib/constants';
+import { useAuth } from '@/context/AuthContext'
 
 const DashboardPage = () => {
+  const { user } = useAuth();
 
-    const fields=[
-      {text: 'Panel de Control', link: ROUTES.USERDASHBOARD, icon:<Database/> },
-      {text: 'Gestioná tus Pedidos', link: ROUTES.USERPLACEORDER, icon:<PackageSearch/> },
-      {text: 'Creá una nueva Orden', link: ROUTES.USERNEWORDER, icon:<PackagePlus/>},
-      {text: 'Personalizá tu Perfil', link: ROUTES.USERPROFILE, icon:<User/> },
-      {text: 'Ponete en Contacto', link: ROUTES.USERCONTACTUS, icon:<Phone/> },
-    ];
+  const fields = [
+    { text: 'Panel de Control', link: `/${user?.role}/dashboard`, icon: <Database /> },
+    { text: 'Gestioná tus Pedidos', link: `/${user?.role}/placeOrder`, icon: <PackageSearch /> },
+    { text: 'Panel administrativo', link: `/${user?.role}/administrationPanel`, icon: <FileSliders /> },
+    { text: 'Creá una nueva Orden', link: `/${user?.role}/newOrder`, icon: <PackagePlus /> },
+    { text: 'Personalizá tu Perfil', link: `/${user?.role}/profile`, icon: <User /> },
+    { text: 'Ponete en Contacto', link: `/${user?.role}/contact`, icon: <Phone /> },
+  ];
 
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
