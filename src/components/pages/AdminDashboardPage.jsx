@@ -1,19 +1,17 @@
-import { ArrowBigRight, Database, MapPinHouseIcon, PackageSearch, Phone, User, FileSliders } from 'lucide-react'
+import { ArrowBigRight, Database, MapPinHouseIcon, PackageSearch, Phone, User } from 'lucide-react'
 import ResponsiveNavBar from "../navbar/ResponsiveNavBar";
 import { useEffect, useRef, useState } from "react";
 import NavBar from "../navbar/NavBar";
 import { Outlet } from "react-router-dom";
-import { useAuth } from '@/context/AuthContext'
+import { ROUTES } from '@/lib/constants';
 
 const AdminDashboardPage = () => {
-    const { user } = useAuth();
 
     const fields=[
-      {text: 'Panel de Control', link:`/${user?.role}/dashboard`, icon:<Database/> },
-      {text: 'Gestioná tus Pedidos', link:`/${user?.role}/placeOrder`, icon:<PackageSearch/> },
-      {text: 'Panel administrativo', link:`/${user?.role}/administrationPanel`, icon:<FileSliders/>},
-      {text: 'Personalizá tu Perfil', link:`/${user?.role}/profile`, icon:<User/> },
-      {text: 'Ver Recorrido de Entregas', link:`/${user?.role}/map`, icon:<MapPinHouseIcon/> },
+      {text: 'Panel de Control', link: ROUTES.ADMINDASHBOARD, icon:<Database/> },
+      {text: 'Gestioná tus Pedidos', link:'/admin/orderManager', icon:<PackageSearch/> },
+      {text: 'Personalizá tu Perfil', link:'/admin/profile', icon:<User/> },
+      {text: 'Ver Recorrido de Entregas', link: ROUTES.ADMINMAP, icon:<MapPinHouseIcon/> },
     ];
   
     const [isOpen, setIsOpen] = useState(false);
@@ -31,12 +29,12 @@ const AdminDashboardPage = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-  //POR EL MOMENTO PAGINA DE PRUEBA PARA QUE REDIGIRA A ALGUN LADO CON LOGIN Y REGISTER
+  
   return (
     <div>
-      <section className="bg-dubraGradient min-h-screen flex pt-25">
+      <section className="bg-dubraGradient h-screen flex pt-25 overflow-hidden flex-1" id='adminDashboard'> 
         
-      <div className='grid grid-cols-6 w-full '>
+      <div className='flex w-full '>
         
         <ResponsiveNavBar
         fields={fields}
@@ -44,7 +42,7 @@ const AdminDashboardPage = () => {
           className={`justify-start ${isOpen ? 'opacity-100 visible bg-black/50' : 'opacity-0 invisible'} `}
           Logo={true}/>
 
-        <div className='sm:col-span-1 bg-dubraPrimary max-md:hidden'>
+        <div className='sm:w-1/5 bg-dubraPrimary max-md:hidden'>
 
           <NavBar
           fields={fields}
@@ -55,9 +53,9 @@ const AdminDashboardPage = () => {
           
         </div>
 
-        <div className='md:col-span-5 max-md:col-span-6 w-full p-5'>
+        <main className='flex-1 w-full overflow-y-auto p-6'>
           <Outlet/>
-        </div>
+        </main>
       </div>
 
       <div className="fixed h-full flex items-center pb-25">

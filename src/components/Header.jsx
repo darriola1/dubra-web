@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import NavBar from './navbar/NavBar'
-import { AlignJustify, Database, DoorOpen, Home, Truck, User2 } from 'lucide-react'
+import { AlignJustify, Database, DoorOpen, Home, Info, Truck, User2 } from 'lucide-react'
 import { Button } from './ui/button'
 import { useAuth } from '@/context/AuthContext'
-
+import { ROUTES } from '@/lib/constants'
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -25,18 +25,19 @@ const Header = () => {
   const {user, logout} = useAuth(); 
 
   const HandleLogOut = async () =>{
-   await logout();}
-  
+   await logout();
+  }
 
   const extraFields = [
-    user ? {text: 'Programá tu envío', link: `/${user?.role}/placeOrder`, icon:<Truck/>} : {text: 'Programá tu envío', link: '/login', icon:<Truck/>},
-    !user && {text: 'Iniciá Sesión', link: '/login', icon:<User2/>},
-    user && {text: 'Cerrar Sesión', link: '/', icon:<DoorOpen/>, onClick: () => HandleLogOut()},
+    user ? {text: 'Programá tu envío', link: ROUTES.USERPLACEORDER, icon:<Truck/>} : {text: 'Programá tu envío', link: ROUTES.LOGIN, icon:<Truck/>},
+    !user && {text: 'Iniciá Sesión', link: ROUTES.LOGIN, icon:<User2/>},
+    user && {text: 'Cerrar Sesión', link: ROUTES.HOME, icon:<DoorOpen/>, onClick: () => HandleLogOut()},
   ].filter(Boolean);
 
   const fields = [
-    { text: 'Inicio', link: '/', icon:<Home/> },
-    user && { text: 'Panel de Control', link: `/${user?.role}/dashboard`, icon:<Database/> },
+    { text: 'Inicio', link: ROUTES.HOME, icon:<Home/> },
+    { text: 'Sobre Nosotros', link: ROUTES.ABOUTUS, icon:<Info/> },
+    user && { text: 'Dashboard', link: ROUTES.USERDASHBOARD, icon:<Database/> },
   ].filter(Boolean);
 
   return (

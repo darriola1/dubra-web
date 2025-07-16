@@ -1,22 +1,20 @@
-import { ArrowBigRight, Database, PackagePlus, PackageSearch, Phone, User, FileSliders } from 'lucide-react'
+import { ArrowBigRight, Database, PackagePlus, PackageSearch, Phone, User } from 'lucide-react'
 import ResponsiveNavBar from "../navbar/ResponsiveNavBar";
 import { useEffect, useRef, useState } from "react";
 import NavBar from "../navbar/NavBar";
 import { Outlet } from "react-router-dom";
-import { useAuth } from '@/context/AuthContext'
+import { ROUTES } from '@/lib/constants';
 
 const DashboardPage = () => {
-  const { user } = useAuth();
 
-  const fields = [
-    { text: 'Panel de Control', link: `/${user?.role}/dashboard`, icon: <Database /> },
-    { text: 'Gestioná tus Pedidos', link: `/${user?.role}/placeOrder`, icon: <PackageSearch /> },
-    { text: 'Panel administrativo', link: `/${user?.role}/administrationPanel`, icon: <FileSliders /> },
-    { text: 'Creá una nueva Orden', link: `/${user?.role}/newOrder`, icon: <PackagePlus /> },
-    { text: 'Personalizá tu Perfil', link: `/${user?.role}/profile`, icon: <User /> },
-    { text: 'Ponete en Contacto', link: `/${user?.role}/contact`, icon: <Phone /> },
-  ];
-  
+    const fields=[
+      {text: 'Panel de Control', link: ROUTES.USERDASHBOARD, icon:<Database/> },
+      {text: 'Gestioná tus Pedidos', link: ROUTES.USERPLACEORDER, icon:<PackageSearch/> },
+      {text: 'Creá una nueva Orden', link: ROUTES.USERNEWORDER, icon:<PackagePlus/>},
+      {text: 'Personalizá tu Perfil', link: ROUTES.USERPROFILE, icon:<User/> },
+      {text: 'Ponete en Contacto', link: ROUTES.USERCONTACTUS, icon:<Phone/> },
+    ];
+
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -35,17 +33,17 @@ const DashboardPage = () => {
   //POR EL MOMENTO PAGINA DE PRUEBA PARA QUE REDIGIRA A ALGUN LADO CON LOGIN Y REGISTER
   return (
     <div>
-      <section className="bg-dubraGradient min-h-screen flex pt-25">
+      <section className="bg-dubraGradient h-screen flex pt-25 overflow-hidden flex-1">
         
-      <div className='grid grid-cols-6 w-full '>
+      <div className='w-full flex'>
         
         <ResponsiveNavBar
         fields={fields}
           menuRef={menuRef}
-          className={`justify-start ${isOpen ? 'opacity-100 visible bg-black/50' : 'opacity-0 invisible'} `}
+          className={`justify-start  ${isOpen ? 'opacity-100 visible bg-black/50' : 'opacity-0 invisible' } `}
           Logo={true}/>
 
-        <div className='sm:col-span-1 bg-dubraPrimary max-md:hidden'>
+        <div className='sm:w-1/5 bg-dubraPrimary max-md:hidden'>
 
           <NavBar
           fields={fields}
@@ -55,10 +53,11 @@ const DashboardPage = () => {
           className={'flex-col py-5 w-full'}/>
           
         </div>
-
-        <div className='md:col-span-5 max-md:col-span-6 w-full'>
+        
+        <main className='flex-1 w-full overflow-y-auto p-6'>
           <Outlet/>
-        </div>
+        </main>
+
       </div>
 
       <div className="fixed h-full flex items-center pb-25">
