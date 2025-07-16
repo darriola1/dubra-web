@@ -6,6 +6,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
+import { Textarea } from './ui/textarea';
 
 const FormError = ({ errors, name}) =>
   errors[name] ? <p className="text-sm text-red-500 font-bold">{errors[name].message}</p> : null;
@@ -45,7 +46,7 @@ export default function FormBuilder({
     }
   };
   return (
-    <Card className={`w-full max-w-xl h-fit ${background}`}>
+    <Card className={`w-full max-w-xl h-fit ${background} place-self-center`}>
       <CardHeader>
         <CardTitle className="text-3xl">{title}</CardTitle>
         <CardDescription className="text-lg">{description}</CardDescription>
@@ -62,6 +63,15 @@ export default function FormBuilder({
                     name={name}
                     control={control}
                     render={({ field }) => (
+                      type == 'textarea' ?
+                      <Textarea
+                        id={name}
+                        type={type}
+                        placeholder={placeholder}
+                        disabled={isLoading}
+                        value = {value? value : ''}
+                        {...field}/> 
+                        :
                       <Input
                         id={name}
                         type={type}
@@ -69,7 +79,7 @@ export default function FormBuilder({
                         disabled={isLoading}
                         value = {value? value : ''}
                         {...field}
-                      />
+                      /> 
                     )}
                   />
                     {children}

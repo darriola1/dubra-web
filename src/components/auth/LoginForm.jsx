@@ -1,11 +1,12 @@
 import React from 'react';
 import FormBuilder from '../FormBuilder';
 import { z } from 'zod';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { API_BASE_URL, ROUTES } from '../../lib/constants';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '@/context/AuthContext';
+import { toast } from 'react-toastify';
 
 const schema = z.object({
   email: z.string().min(1, 'El email es obligatorio').email('Email inválido'),
@@ -25,13 +26,16 @@ export default function LoginForm() {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
       body: JSON.stringify({ email, password, recaptchaToken }),
-    });
-      const result = await res.json();
-    if (!res.ok) {
-      throw new Error(result.error || 'Error al loguear');
-    }
-    verificarAutenticacion();
-    navigate(ROUTES.USERDASHBOARD);
+    }).then(response => {
+        if(!response.ok){
+          throw new Error(response.error || 'Error al enviar');
+        }
+        if (response.status == 200){
+          toast.success('Inicio de sesión correcto!')
+          verificarAutenticacion();
+          navigate(ROUTES.USERDASHBOARD);
+        }
+    })
   };
 
   const { setValue, formState: { errors }, control, handleSubmit } = useForm({

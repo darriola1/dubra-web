@@ -17,6 +17,8 @@ import { AuthProvider } from './context/AuthContext';
 import ProfilePage from './components/pages/ProfilePage';
 import NewOrderPage from './components/pages/NewOrderPage';
 import AboutUsPage from './components/pages/AboutUsPage';
+import ContactUsForm from './components/ContactUsForm';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const location = useLocation(); 
@@ -35,11 +37,12 @@ function App() {
             <Route path="/user"
               element={<ProtectedRoute>
               <DashboardPage />
-              </ProtectedRoute>}>
+              </ProtectedRoute>}> 
                 <Route path='dashboard' element={<Dashboard/>}/>
                 <Route path='placeOrder' element={<PlaceOrderPage/>}/>
                 <Route path='profile' element={<ProfilePage/>}/>
                 <Route path='newOrder' element={<NewOrderPage/>}/>
+                <Route path='contact' element={<ContactUsForm/>}/>
               </Route>
             <Route path='/admin'
               element={<ProtectedRoute>
@@ -51,6 +54,7 @@ function App() {
           </Routes>
         {showFooter && <Footer />}
       </AuthProvider>
+      <ToastContainer/>
     </>
   )
 }

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { API_BASE_URL } from "@/lib/constants";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
@@ -34,20 +35,30 @@ export const AuthProvider = ({ children }) => {
       const res = await fetch(`${API_BASE_URL}/auth/logout`, {
         method: 'Post',
         credentials: 'include',
-      });
-      if(res.ok){
-        setUser(null);
-      }
+    }).then(response => {
+        if (response.status == 401){
+          Navigate('/login')
+        }
+        if(!response.ok){
+          throw new Error(response.error || 'Error al enviar');
+        }
+        if (response.status == 200){
+          setUser(null)
+          toast.success('Sesión cerrada!')
+          navigate('/dashboard');
+        }
+    })
     } catch (err){
-        setLoading(false);
+      setLoading(false);
     }
-    
-    
-  };
+  }
 
+  const setUserNull = async () => {
+    setUser(null)
+  }
 
   return (
-    <AuthContext.Provider value={{ user, loading, logout, verificarAutenticacion }}>
+    <AuthContext.Provider value={{ user, loading, logout, verificarAutenticacion, setUserNull }}>
       {children}
     </AuthContext.Provider>
   );

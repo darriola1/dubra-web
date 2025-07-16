@@ -18,7 +18,7 @@ const HomePage = () => {
     setShippingData(null);
 
     try {
-      const res = await fetch(`${API_BASE_URL}/shipping/${trackingId}`);
+      const res = await fetch(`${API_BASE_URL}/shipping/${trackingId}`, {credentials:'include'});
       if (!res.ok) throw new Error('No encontrado en la API');
 
       const data = await res.json();
