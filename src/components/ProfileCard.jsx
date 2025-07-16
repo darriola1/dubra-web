@@ -4,6 +4,7 @@ import React from 'react'
 
 const ProfileCard = () => {
     const {user} = useAuth()
+    console.log(user)
   return (
     <div className='w-full max-w-2xl bg-dubraPrimary flex rounded-xl gap-5'>
         <div className='w-1/4'>

@@ -10,12 +10,12 @@ import { useNavigate } from 'react-router-dom'
 import { API_BASE_URL, STATUS_COLORS } from '../../lib/constants';
 
 const ShipmentRow = ({ shipment }) => {
-  const fecha = new Date(shipment.createdAt)
-  const fechaStr = fecha.toLocaleDateString("es-AR")
+  const fecha = new Date(shipment.createdAt);
+  const fechaStr = fecha.toLocaleDateString("es-AR");
   const horaStr = fecha.toLocaleTimeString("es-AR", {
     hour: "2-digit",
     minute: "2-digit",
-  })
+  });
 
   return (
     <TableRow>
@@ -29,14 +29,10 @@ const ShipmentRow = ({ shipment }) => {
         </div>
       </TableCell>
       <TableCell>
-        <div className="text-sm flex items-center gap-1">
-          {shipment.fromAddress || "-"}
-        </div>
+        <div className="text-sm flex items-center gap-1">{shipment.fromAddress || "-"}</div>
       </TableCell>
       <TableCell>
-        <div className="text-sm flex items-center gap-1">
-          {shipment.toAddress || "-"}
-        </div>
+        <div className="text-sm flex items-center gap-1">{shipment.toAddress || "-"}</div>
       </TableCell>
       <TableCell>
         <Badge
@@ -45,67 +41,51 @@ const ShipmentRow = ({ shipment }) => {
         </Badge>
       </TableCell>
       <TableCell>
-        <div className="font-medium">$1,000</div>
-      </TableCell>
-      <TableCell>
-        {/* decidir que acciones mostrar en esta tabla
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-            <DropdownMenuItem>
-              <Eye className="mr-2 h-4 w-4" />
-              Ver detalles
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Edit className="mr-2 h-4 w-4" />
-              Editar
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-red-600">
-              <Trash2 className="mr-2 h-4 w-4" />
-              Eliminar
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>*/}
+        {/* ver que acciones queremos ponerle eliminar editar o lo que sea */}
       </TableCell>
     </TableRow>
-  )
-}
+  );
+};
 
 export default function PlaceOrderPage() {
-  const [shipments, setShipments] = useState([]) // Estado para guardar los envios
-  const [searchTerm, setSearchTerm] = useState("") // Estado para el termino de busqueda que este poniendo en el input
-  const [statusFilter, setStatusFilter] = useState("") // Estado para el filtro de estado, quye es el select
-  const [offset, setOffset] = useState(0) // Estado para la paginacion, para saber desde que resultado empezar a mostrar y sirve para mostrar cantidad de resultados por pagina
-  const [limit, setLimit] = useState(10) // Estado para el limite de resultados por pagina se marca el limte
-  const [total, setTotal] = useState(0) // Estado para el total de envios que hay en la base de datos
+  const [shipments, setShipments] = useState([]); // Estado para los envíos
+  const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
+  const [statusFilter, setStatusFilter] = useState(""); // Estado para el filtro de estado
+  const [offset, setOffset] = useState(0); // Estado para la paginación
+  const [limit, setLimit] = useState(10); // Estado para el límite de resultados
+  const [total, setTotal] = useState(0); // Estado para el total de envíos
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchShipments = async () => {
-      try {
-        const query = new URLSearchParams(); // se contruye  la query para la url para hacer la peticion a la api
-        if (searchTerm) query.append("search", searchTerm); // si hay un termino de busqueda en el search se agrega a la query
-        if (statusFilter) query.append("status", statusFilter); // si hay un filtro de estado se agrega a la query
-        query.append("limit", limit.toString()); // se agrega el limite de resultados por pagina a la query
-        query.append("offset", offset.toString()); // se agrega el offset a la query para saber desde que resultado empezar a mostrar
+  const fetchShipments = async () => {
+    try {
+      const query = new URLSearchParams({
+        search: searchTerm || "",
+        status: statusFilter || "",
+        limit: limit.toString(),
+        offset: offset.toString(),
+      });
 
-        const res = await fetch(`${API_BASE_URL}/shippings?${query.toString()}`);
-        const data = await res.json();
+      const res = await fetch(`${API_BASE_URL}/shipping?${query.toString()}`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      const data = await res.json();
 
-        setShipments(data.data); // se guarda en el estado los envios que vienen de la api
-        setTotal(data.total || 0); // se guarda el total de envios que hay en la base de datos
-      } catch (err) {
-        console.error("Error al obtener envíos:", err);
+      // Actualiza los envíos solo si la respuesta es válida
+      if (Array.isArray(data) && data.length > 0) {
+        setShipments(data);
+        setTotal(data.length);
+      } else {
+        setShipments([]); // Si no hay datos, se limpia el estado
       }
-    };
-
+    } catch (err) {
+      console.error("Error al obtener envíos:", err);
+      setShipments([]); // Limpia el estado en caso de error
+    }
+  };
+  // obtener los envíos cada vez que cambian las dependencias
+  useEffect(() => {
     fetchShipments();
   }, [searchTerm, statusFilter, offset, limit]);
 
@@ -159,19 +139,18 @@ export default function PlaceOrderPage() {
                   <TableHead className="font-bold">Recogida</TableHead>
                   <TableHead className="font-bold">Entrega</TableHead>
                   <TableHead className="font-bold">Estado</TableHead>
-                  <TableHead className="font-bold">Valor</TableHead>
                   <TableHead className="font-bold">Acciones</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {shipments && shipments.length === 0 ? (
+                {shipments.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={8} className="text-center">
                       No hay resultados para mostrar.
                     </TableCell>
                   </TableRow>
                 ) : (
-                  shipments && shipments.map((shipment) => (
+                  shipments.map((shipment) => (
                     <ShipmentRow key={shipment.id} shipment={shipment} />
                   ))
                 )}
@@ -180,20 +159,20 @@ export default function PlaceOrderPage() {
           </CardContent>
           <div className="flex justify-between items-center mt-4 px-4">
             <span className="text-sm">
-              Mostrando {offset + 1} a {Math.min(offset + limit, total)} de {total} envíos 
-            </span> 
-            <div className="flex gap-2"> 
+              Mostrando {offset + 1} a {Math.min(offset + limit, total)} de {total} envíos
+            </span>
+            <div className="flex gap-2">
               <Button
                 variant="outline"
-                onClick={() => setOffset(Math.max(0, offset - limit))} // al hacer click en el boton anterior se resta el limite al offset
-                disabled={offset === 0} // si el offset es 0, deshabilita el boton anterior
+                onClick={() => setOffset(Math.max(0, offset - limit))}
+                disabled={offset === 0}
               >
                 Anterior
               </Button>
               <Button
                 variant="outline"
-                onClick={() => setOffset(offset + limit)} // al hacer click en el boton siguiente se suma el limite al offset
-                disabled={offset + limit >= total} // si el offset + el limite es mayor o igual al total, deshabilita el boton
+                onClick={() => setOffset(offset + limit)}
+                disabled={offset + limit >= total}
               >
                 Siguiente
               </Button>
@@ -202,5 +181,5 @@ export default function PlaceOrderPage() {
         </Card>
       </div>
     </div>
-  )
+  );
 }
