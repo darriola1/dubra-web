@@ -5,10 +5,11 @@ import { Navigate } from "react-router-dom";
 const ProtectedRoute = ({ children }) => {
 
 async function verificarAutenticacion() {
-  const response = await fetch(`${API_BASE_URL}/auth/me/`, {
-    credentials: "include",
-  });
-  return response.ok;
+  // const response = await fetch(`${API_BASE_URL}/auth/me/`, {
+  //   credentials: "include",
+  // });
+  // return response.ok;
+  return 'hi'
 }
 
   const [auth, setAuth] = useState(null);

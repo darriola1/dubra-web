@@ -6,8 +6,15 @@
   font-style: normal;
 }
 
-@layer theme, base, components, utilities;
+@layer theme, base, components;
 @tailwind utilities;
+
+@layer utilities{
+  .leaflet-routing-container{
+    @apply bg-dubraPrimary text-dubraText p-[6px]
+  }
+
+}
 
 @layer components {
 

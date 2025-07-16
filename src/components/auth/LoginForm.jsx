@@ -33,7 +33,7 @@ export default function LoginForm() {
         if (response.status == 200){
           toast.success('Inicio de sesión correcto!')
           verificarAutenticacion();
-          navigate('/user/dashboard');
+          navigate(ROUTES.USERDASHBOARD);
         }
     })
   };

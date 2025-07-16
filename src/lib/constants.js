@@ -13,8 +13,17 @@ export const COLORS = {
 export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
-  REGISTER: '/registrarse',
-  ABOUTUS: '/conocenos',
+  REGISTER: '/register',
+  ABOUTUS: '/aboutUs',
+  //User routes
+  USERPLACEORDER: '/user/placeOrder',
+  USERDASHBOARD: '/user/dashboard',
+  USERPROFILE: '/user/profile',
+  USERNEWORDER: '/user/newOrder',
+  USERCONTACTUS: '/user/contactUs',
+  //Admin routes
+  ADMINDASHBOARD: '/admin/dashboard',
+  ADMINMAP: '/admin/map',
 };
 
 export const STATUS_COLORS = {
@@ -22,5 +31,5 @@ export const STATUS_COLORS = {
   en_camino: 'bg-blue-100 text-blue-800',
   entregado: 'bg-green-100 text-green-800',
   cancelado: 'bg-red-100 text-red-800',
-};
+}; // todo: tailwind classes
 

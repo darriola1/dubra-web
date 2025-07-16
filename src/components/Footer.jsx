@@ -3,10 +3,13 @@ import { Phone, MapPin, Mail, Hop } from 'lucide-react'
 import { NavigationMenuList, NavigationMenu } from './ui/navigation-menu'
 import NavBarButton from './navbar/NavBarButton'
 import SocialButton from './SocialButton'
+import { ROUTES } from '@/lib/constants'
+import { useAuth } from '@/context/AuthContext'
 
 NavBarButton
 
 const Footer = () => {
+    const {user} = useAuth()
   return (
     <footer className='grid bg-dubraPrimary p-5 grid-cols-6 gap-5 text-lg '>
         <div className='max-md:col-span-6 md:col-span-3 px-3'>
@@ -21,9 +24,9 @@ const Footer = () => {
             <p className='text-lg pb-6 font-bold'>Enlaces Rápidos</p>
             <NavigationMenu>
                 <NavigationMenuList className='flex-col items-start'>
-                    <NavBarButton text={'Inicio'} link={'/'}/>
-                    <NavBarButton text={'Sobre Nosotros'} link={'#'}/>
-                    <NavBarButton text={'Programar un envio'} link={'#'}/>
+                    <NavBarButton text={'Inicio'} link={ROUTES.HOME}/>
+                    <NavBarButton text={'Sobre Nosotros'} link={ROUTES.ABOUTUS}/>
+                    <NavBarButton text={'Programar un envio'} link={user ? ROUTES.USERDASHBOARD : ROUTES.LOGIN}/>
                 </NavigationMenuList>
             </NavigationMenu>
             
