@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { STATUS_COLORS } from '../../src/lib/constants';
+import { STATUS_SHIPPING_OPTIONS } from '../../src/lib/constants';
 
 const ShippingCard = ({ shipping, onClose }) => {
     const [isVisible, setIsVisible] = useState(true);
@@ -13,7 +13,9 @@ const ShippingCard = ({ shipping, onClose }) => {
 
     if (!shipping) return null;
 
-    const statusLabel = shipping.status?.replace('_', ' ') || 'Desconocido';
+    const statusObj = STATUS_SHIPPING_OPTIONS.find(opt => opt.value === shipping.status);
+    const statusLabel = statusObj?.label || "Desconocido";
+    const statusClass = statusObj?.colorClass || "bg-gray-100 text-gray-800";
     const formattedDate = shipping.updatedAt ? new Date(shipping.updatedAt).toLocaleString() : 'Fecha no disponible';
 
     return (
@@ -27,7 +29,7 @@ const ShippingCard = ({ shipping, onClose }) => {
 
             <h2 className="text-2xl font-semibold mb-4">📦Pedido #{shipping.trackingId}</h2>
 
-            <div className={`inline-block px-3 py-1 rounded-full text-sm font-bold mb-4 ${STATUS_COLORS[shipping.status] || 'bg-gray-100 text-gray-800'}`}>
+            <div className={`inline-block px-3 py-1 rounded-full text-sm font-bold mb-4 ${statusClass}`}>
                 Estado: {statusLabel}
             </div>
 
