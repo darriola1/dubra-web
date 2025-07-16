@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Search, PackagePlus } from "lucide-react";
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
+//import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
+import { Search, PackagePlus } from "lucide-react"
+import { useNavigate } from 'react-router-dom' 
 import { API_BASE_URL, STATUS_COLORS } from '../../lib/constants';
 
 const ShipmentRow = ({ shipment }) => {
@@ -89,9 +90,9 @@ export default function PlaceOrderPage() {
   }, [searchTerm, statusFilter, offset, limit]);
 
   return (
-    <div className="items-center flex flex-col gap-8 max-w-fit mx-auto">
+    <div className="items-center flex flex-col gap-8 b">
       <div className="flex flex-col gap-4 p-4 max-w-7xl mx-auto w-full">
-        <Card>
+        <Card className='bg-dubraPrimary'>
           <CardHeader>
             <CardTitle>Filtros</CardTitle>
           </CardHeader>
@@ -108,7 +109,7 @@ export default function PlaceOrderPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="border py-2 rounded-md text-sm"
+              className="border py-2 rounded-md text-sm bg-dubraPrimary"
             >
               <option value="">Todos</option>
               <option value="pendiente">Pendiente</option>
@@ -116,14 +117,14 @@ export default function PlaceOrderPage() {
               <option value="entregado">Entregado</option>
               <option value="cancelado">Cancelado</option>
             </select>
-            <Button variant="outline" onClick={() => navigate("/user/newOrder")}>
+            <Button variant="outline" className='bg-dubraSecondary' onClick={() => navigate("/user/newOrder")}>
               <PackagePlus className="h-4 w-4" />
               Nuevo envío
             </Button>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className='bg-dubraPrimary'>
           <CardHeader>
             <CardTitle>Lista de Envíos</CardTitle>
             <CardDescription>Todos tus envíos para que puedas buscar y filtrar fácilmente</CardDescription>
