@@ -1,10 +1,12 @@
 import React from 'react';
 import FormBuilder from '../FormBuilder';
 import { z } from 'zod';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { API_BASE_URL, ROUTES } from '../../lib/constants';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAuth } from '@/context/AuthContext';
+import { toast } from 'react-toastify';
 
 // Definición de esquema de validacion usando Zod
 //test(val) devuelve true si el texto contiene el patrón buscado por la expresion regular
@@ -45,14 +47,20 @@ export default function RegisterForm() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    });
-
-    if (!res.ok) {
-      const result = await res.json();
-      throw new Error(result.error || 'Error al registrarse');
-    }
-
-    navigate('/dashboard');
+    }).then(response => {
+        if (response.status == 401){
+          const {setUserNull} = useAuth();
+          setUserNull();
+          Navigate('/login')
+        }
+        if(!response.ok){
+          throw new Error(response.error || 'Error al enviar');
+        }
+        if (response.status == 200){
+          toast.success('Email enviado correctamente!')
+          navigate('/dashboard');
+        }
+    })
   };
 
   const { setValue, formState: { errors }, control, handleSubmit } = useForm({
