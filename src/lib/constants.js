@@ -10,6 +10,23 @@ export const COLORS = {
   darkBlue: '#001F45',
 };
 
+export const ROUTES = {
+  HOME: '/',
+  LOGIN: '/login',
+  REGISTER: '/register',
+  ABOUTUS: '/aboutUs',
+  //User routes
+  USERPLACEORDER: '/user/placeOrder',
+  USERDASHBOARD: '/user/dashboard',
+  USERPROFILE: '/user/profile',
+  USERNEWORDER: '/user/newOrder',
+  USERCONTACTUS: '/user/contactUs',
+  //Admin routes
+  ADMINDASHBOARD: '/admin/dashboard',
+  ADMINMAP: '/admin/map',
+};
+
+
 export const STATUS_SHIPPING_OPTIONS = [
   {
     value: "pendiente",
