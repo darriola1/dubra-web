@@ -6,8 +6,15 @@
   font-style: normal;
 }
 
-@layer theme, base, components, utilities;
+@layer theme, base, components;
 @tailwind utilities;
+
+@layer utilities{
+  .leaflet-routing-container{
+    @apply bg-dubraPrimary text-dubraText p-[6px]
+  }
+
+}
 
 @layer components {
 
@@ -16,11 +23,19 @@
   }
 
   .bg-dubraSecondary {
-    @apply bg-dubraSecondary text-dubraText transition-transform duration-300;
+    @apply bg-dubraSecondary text-dubraText;
   }
 
   .bg-dubraWhite{
     @apply bg-dubraWhite text-dubraPrimary;
+  }
+
+  .bg-dubraGradient{
+    @apply bg-gradient-to-br from-dubraText to-dubraPrimary
+  }
+
+  .button-dubraSecondary {
+    @apply bg-dubraSecondary text-dubraText hover:brightness-110 transition-all duration-200
   }
 
 }
