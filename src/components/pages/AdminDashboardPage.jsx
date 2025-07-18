@@ -35,7 +35,7 @@ const AdminDashboardPage = () => {
   
   return (
     <div>
-      <section className="bg-dubraGradient h-screen flex pt-25 overflow-hidden flex-1" id='adminDashboard'> 
+      <section className="bg-dubraGradient h-screen flex pt-28 overflow-hidden flex-1" id='adminDashboard'> 
         
       <div className='flex w-full '>
         
@@ -56,7 +56,7 @@ const AdminDashboardPage = () => {
           
         </div>
 
-        <main className='flex-1 w-full overflow-y-auto p-6'>
+        <main className='flex-1 w-full overflow-y-auto'>
           <Outlet/>
         </main>
       </div>

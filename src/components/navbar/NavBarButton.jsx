@@ -16,7 +16,8 @@ const NavBarButton = ({ text, link, icon }) => {
           to={link}
           className={`text-xl relative cursor-pointer after:absolute after:bottom-[-2px] after:left-1/2 after:h-[1px] after:bg-[#e9f2ef] after:transition-all after:duration-300 after:-translate-x-1/2
             ${isActive ? "after:w-full after:bg-dubraSecondary " : "after:w-0"} hover:after:w-full text-center`}
-        >
+          onClick={() => window.scrollTo({ top: 0 })}
+        > 
           {icon}
           {text}
         </Link>
@@ -24,5 +25,5 @@ const NavBarButton = ({ text, link, icon }) => {
     </NavigationMenuItem>
   );
 };
-
+// todo: fix text-icon
 export default NavBarButton;

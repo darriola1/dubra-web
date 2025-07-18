@@ -37,7 +37,7 @@ const Header = () => {
   const fields = [
     { text: 'Inicio', link: ROUTES.HOME, icon:<Home/> },
     { text: 'Sobre Nosotros', link: ROUTES.ABOUTUS, icon:<Info/> },
-    user && { text: 'Dashboard', link: `/${user?.role}/dashboard`, icon:<Database/> },
+    user && { text: 'Panel de Control', link: `/${user?.role}/dashboard`, icon:<Database/> },
   ].filter(Boolean);
 
   return (

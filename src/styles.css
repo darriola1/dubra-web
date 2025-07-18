@@ -23,7 +23,7 @@
   }
 
   .bg-dubraSecondary {
-    @apply bg-dubraSecondary text-dubraText transition-transform duration-300;
+    @apply bg-dubraSecondary text-dubraText;
   }
 
   .bg-dubraWhite{
@@ -32,6 +32,10 @@
 
   .bg-dubraGradient{
     @apply bg-gradient-to-br from-dubraText to-dubraPrimary
+  }
+
+  .button-dubraSecondary {
+    @apply bg-dubraSecondary text-dubraText hover:brightness-110 transition-all duration-200
   }
 
 }
