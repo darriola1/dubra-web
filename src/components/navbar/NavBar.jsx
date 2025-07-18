@@ -21,7 +21,7 @@ const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo, classN
             {Logo && 
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    <Link to={ROUTES.HOME}>
+                    <Link to={`${ROUTES.HOME}`} onClick={() => window.scrollTo({ top: 0 })}>
                         <DubraLogo className={'w-70 h-22 pe-10 object-contain'}/>
                     </Link>
                 </NavigationMenuItem>

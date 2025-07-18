@@ -1,13 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { API_BASE_URL, STATUS_PAYMENT_OPTIONS } from "@/lib/constants";
 import { useAuth } from "@/context/AuthContext";
 import Filters from "@/components/shared/Filters";
 import Pagination from "@/components/shared/Pagination";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button"
-import { Download } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 export default function AdminAdministrationPanel() {
   const [invoices, setInvoices] = useState([]);
@@ -26,7 +33,9 @@ export default function AdminAdministrationPanel() {
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/customer/`, { credentials: "include" });
+        const res = await fetch(`${API_BASE_URL}/customer/`, {
+          credentials: "include",
+        });
         const data = await res.json();
         setCustomers(data || []);
       } catch {
@@ -51,10 +60,13 @@ export default function AdminAdministrationPanel() {
       });
 
       try {
-        const res = await fetch(`${API_BASE_URL}/invoice/?${query.toString()}`, {
-          method: 'GET',
-          credentials: 'include'
-        });
+        const res = await fetch(
+          `${API_BASE_URL}/invoice/?${query.toString()}`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
 
         const data = await res.json();
         if (data && Array.isArray(data.rows)) {
@@ -70,12 +82,21 @@ export default function AdminAdministrationPanel() {
     };
 
     fetchInvoices();
-  }, [user, search, customerId, statusPayment, fromDate, toDate, offset, limit]);
+  }, [
+    user,
+    search,
+    customerId,
+    statusPayment,
+    fromDate,
+    toDate,
+    offset,
+    limit,
+  ]);
 
   const handleFileUpload = async (invoiceId, file) => {
     const formData = new FormData();
     formData.append("file", file);
-    setUploadStatus(prev => ({ ...prev, [invoiceId]: "loading" }));
+    setUploadStatus((prev) => ({ ...prev, [invoiceId]: "loading" }));
 
     try {
       const res = await fetch(`${API_BASE_URL}/invoice/${invoiceId}/upload`, {
@@ -87,18 +108,20 @@ export default function AdminAdministrationPanel() {
       if (!res.ok) throw new Error("Error al subir archivo");
       const updated = await res.json();
 
-      setInvoices(prev => prev.map(inv => (inv.id === invoiceId ? updated : inv)));
-      setUploadStatus(prev => ({ ...prev, [invoiceId]: "done" }));
+      setInvoices((prev) =>
+        prev.map((inv) => (inv.id === invoiceId ? updated : inv))
+      );
+      setUploadStatus((prev) => ({ ...prev, [invoiceId]: "done" }));
 
       setTimeout(() => {
-        setUploadStatus(prev => {
+        setUploadStatus((prev) => {
           const newStatus = { ...prev };
           delete newStatus[invoiceId];
           return newStatus;
         });
       }, 2000);
     } catch {
-      setUploadStatus(prev => ({ ...prev, [invoiceId]: "error" }));
+      setUploadStatus((prev) => ({ ...prev, [invoiceId]: "error" }));
     }
   };
 
@@ -143,27 +166,44 @@ export default function AdminAdministrationPanel() {
           <TableBody>
             {invoices.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7} className="text-center">No hay facturas.</TableCell>
+                <TableCell colSpan={7} className="text-center">
+                  No hay facturas.
+                </TableCell>
               </TableRow>
             ) : (
-              invoices.map(inv => {
-                const fecha = new Date(inv.createdAt).toLocaleDateString("es-AR");
+              invoices.map((inv) => {
+                const fecha = new Date(inv.createdAt).toLocaleDateString(
+                  "es-AR"
+                );
                 const total = inv.movement?.amount ?? "—";
                 const estadoValue = inv.movement?.estado;
-                const estadoData = STATUS_PAYMENT_OPTIONS.find(opt => opt.value === estadoValue);
+                const estadoData = STATUS_PAYMENT_OPTIONS.find(
+                  (opt) => opt.value === estadoValue
+                );
                 const estadoLabel = estadoData?.label || "—";
-                const badgeClass = estadoData?.colorClass || "bg-gray-100 text-gray-800";
+                const badgeClass =
+                  estadoData?.colorClass || "bg-gray-100 text-gray-800";
 
                 return (
                   <TableRow key={inv.id}>
                     <TableCell>{inv.number}</TableCell>
-                    <TableCell>{inv.customer?.nombre_fantasia ?? "—"}</TableCell>
+                    <TableCell>
+                      {inv.customer?.nombre_fantasia ?? "—"}
+                    </TableCell>
                     <TableCell>{fecha}</TableCell>
-                    <TableCell className={`font-bold ${total >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                      {typeof total === "number" ? `$${total.toLocaleString("es-AR")}` : "—"}
+                    <TableCell
+                      className={`font-bold ${
+                        total >= 0 ? "text-green-600" : "text-red-600"
+                      }`}
+                    >
+                      {typeof total === "number"
+                        ? `$${total.toLocaleString("es-AR")}`
+                        : "—"}
                     </TableCell>
                     <TableCell>
-                      <Badge className={`${badgeClass} font-bold`}>{estadoLabel}</Badge>
+                      <Badge className={`${badgeClass} font-bold`}>
+                        {estadoLabel}
+                      </Badge>
                     </TableCell>
                     <TableCell>
                       {typeof total === "number" && total >= 0 ? (
@@ -184,19 +224,31 @@ export default function AdminAdministrationPanel() {
                           }}
                         />
                       ) : (
-                        <span className="text-gray-400 italic">No disponible, pago pendiente.</span>
+                        <span className="text-gray-400 italic">
+                          No disponible, pago pendiente.
+                        </span>
                       )}
                     </TableCell>
                     <TableCell>
                       {inv.fileBase64 ? (
-                        <Button asChild variant="outline" size="sm" className="h-7 px-2 text-xs flex items-center gap-1">
-                          <a href={`data:application/pdf;base64,${inv.fileBase64}`} download={`${inv.number}.pdf`}>
+                        <Button
+                          asChild
+                          variant="outline"
+                          size="sm"
+                          className="h-7 px-2 text-xs flex items-center gap-1"
+                        >
+                          <a
+                            href={`data:application/pdf;base64,${inv.fileBase64}`}
+                            download={`${inv.number}.pdf`}
+                          >
                             <Download className="w-3 h-3" />
                             Descargar
                           </a>
                         </Button>
                       ) : (
-                        <span className="text-gray-500 italic">Sin archivo</span>
+                        <span className="text-gray-500 italic">
+                          Sin archivo
+                        </span>
                       )}
                     </TableCell>
                   </TableRow>

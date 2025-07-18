@@ -16,8 +16,8 @@ const Footer = () => {
             <p className='font-black text-xl pb-5'>DUBRA <br/> Transporte y Logística</p>
             <p>Soluciones de transporte y logística para empresas en Ciudad de la Costa - Montevideo.</p>
                 <div className='py-2 gap-3 flex'>
-                    <SocialButton alt={'whatsapp'} backgroundColor={'bg-dubraSecondary hover:bg-dubraSecondary/80'} url={'https://wa.link/j4qyez'}/>
-                    <SocialButton alt={'instagram'} backgroundColor={'bg-dubraSecondary hover:bg-dubraSecondary/80'} url={'https://www.instagram.com/dubra_transporte_y_logistica?igsh=MTNnaWMwdjhubHJxcA=='}/>
+                    <SocialButton alt={'whatsapp'} buttonColor={'button-dubraSecondary'} url={'https://wa.link/j4qyez'}/>
+                    <SocialButton alt={'instagram'} buttonColor={'button-dubraSecondary'} url={'https://www.instagram.com/dubra_transporte_y_logistica?igsh=MTNnaWMwdjhubHJxcA=='}/>
                 </div>
             </div>
         <div className='max-md:col-span-5 md:col-span-1 px-3'>

@@ -35,7 +35,7 @@ const DashboardPage = () => {
   //POR EL MOMENTO PAGINA DE PRUEBA PARA QUE REDIGIRA A ALGUN LADO CON LOGIN Y REGISTER
   return (
     <div>
-      <section className="bg-dubraGradient h-screen flex pt-25 overflow-hidden flex-1">
+      <section className="bg-dubraGradient h-screen flex pt-25 overflow-hidden flex-1" id='userDashboard'>
         
       <div className='w-full flex'>
         

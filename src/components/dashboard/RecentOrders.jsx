@@ -3,18 +3,18 @@ import ServiceCard from '../ServiceCard';
 import { ArrowBigRight, PackageSearchIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const RecentOrders = ({ linkTo /*, Orders*/ }) => {
+const RecentOrders = ({ linkTo, title, rol /*, Orders*/ }) => {
   const Orders = [
-    { icon: <PackageSearchIcon className='text-dubraSecondary'/>, title: 'Orden 8472389', description: new Date() },
-    { icon: <PackageSearchIcon className='text-dubraSecondary'/>, title: 'Orden 8472390', description: new Date() },
-    { icon: <PackageSearchIcon className='text-dubraSecondary'/>, title: 'Orden 8472391', description: new Date() },
+    { icon: <PackageSearchIcon className='text-dubraSecondary'/>, title: 'Orden 8472389', description: new Date(), user: 'User 1' },
+    { icon: <PackageSearchIcon className='text-dubraSecondary'/>, title: 'Orden 8472390', description: new Date(), user: 'User 1'  },
+    { icon: <PackageSearchIcon className='text-dubraSecondary'/>, title: 'Orden 8472391', description: new Date(), user: 'User 1'  },
   ];
 
   const showMakeOrderCard = Orders.length < 3;
 
   return (
-    <div className='h-fit flex flex-col gap-3 text-center border p-5 rounded-xl bg-dubraPrimary items-center'>
-      <h2 className='text-2xl'>Órdenes Recientes</h2>
+    <div className='h-fit w-fit flex flex-col gap-3 text-center border p-5 rounded-xl bg-dubraPrimary items-center'>
+      <h2 className='text-2xl w-fit'>{title}</h2>
 
       {Orders.length > 0 ? (
         Orders.map(({ title, icon, description }, index) => (
@@ -23,6 +23,7 @@ const RecentOrders = ({ linkTo /*, Orders*/ }) => {
             icon={icon}
             title={title}
             description={description.toLocaleDateString() /*Opcional, agregar */}
+            content={rol == 'admin'? `Pedido por: ${user}` : null}
             background='outline bg-dubraWhite'
           />
         ))

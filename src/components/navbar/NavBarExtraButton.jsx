@@ -10,10 +10,11 @@ const NavBarExtraButton = ({icon, text, onClick, link}) => {
             <Link
             to={link}
             className={`text-xl`}
+            onClick={() => window.scrollTo({ top: 0 })}
             >
-                <Button className='text-base bg-dubraSecondary hover:bg-dubraSecondary/80 p-3 font-bold' onClick={onClick}>
-                    {icon}
-                    {text}
+                <Button className='text-base button-dubraSecondary p-3 font-bold group duration-200 transition-all' onClick={onClick}>
+                    <p className='group-hover:scale-105 duration-200 transition-all'>{icon}
+                    {text}</p>
                 </Button>
             </Link>
       </NavigationMenuLink>

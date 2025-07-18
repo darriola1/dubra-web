@@ -38,6 +38,7 @@ const HomePage = () => {
     <div className='pt-25'>
       <HeroSection
         imageSrc={camioneta}
+        id={'main'}
         title={'SEGUÍ TU ENVÍO'}
         subtitle={'Ingresá el número de rastreo y conocé el estado de tu pedido.'}
         extraComponent={

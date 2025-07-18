@@ -108,10 +108,10 @@ export default function FormBuilder({
 
           <Button
             type="submit"
-            className="bg-dubraSecondary hover:bg-dubraSecondary/80 font-bold"
+            className="button-dubraSecondary duration-200 transition-all group font-bold"
             disabled={isLoading}
           >
-            {isLoading ? 'Procesando...' : title}
+            <p className='duration-200 transition-all group-hover:scale-105'>{isLoading ? 'Procesando...' : title}</p>
           </Button>
         </form>
       </CardContent>

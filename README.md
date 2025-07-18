@@ -81,6 +81,7 @@ npm install
 - `bg-dubraPrimary`: applies `--color-dubraPrimary` to background and `--color-dubraText` to texts.
 - `bg-dubraSecondary`: applies `--color-dubraSecondary` to background and `--color-dubraText` to texts.
 - `bg-dubraWhite`: applies `--color-dubraWhite` to background and `--color-dubraPrimary` to texts.
+- `button-dubraSecondary`: applies `bg-dubraSecondary text-dubraText hover:brightness-110 transition-all duration-200`.
 
 
 ## ⚛️ Custom React Components
