@@ -1,40 +1,35 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
+import { Textarea } from './ui/textarea';
 
-const FormError = ({ errors, name }) =>
+const FormError = ({ errors, name}) =>
   errors[name] ? <p className="text-sm text-red-500 font-bold">{errors[name].message}</p> : null;
 
 export default function FormBuilder({
   title,
   description,
   fields,
-  schema,
-  defaultValues,
   onSubmit,
   footer,
-  background
+  background,
+  children,
+  recaptcha,
+  control,
+  handleSubmit,
+  errors
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(schema),
-    defaultValues,
-  });
-
   const handleFormSubmit = async (data) => {
-    if (!recaptchaToken) {
+    if (!recaptchaToken && recaptcha) {
       setError('Por favor completá el reCAPTCHA');
       return;
     }
@@ -51,7 +46,7 @@ export default function FormBuilder({
     }
   };
   return (
-    <Card className={`w-full max-w-md ${background}`}>
+    <Card className={`w-full max-w-xl h-fit ${background} place-self-center`}>
       <CardHeader>
         <CardTitle className="text-3xl">{title}</CardTitle>
         <CardDescription className="text-lg">{description}</CardDescription>
@@ -59,38 +54,64 @@ export default function FormBuilder({
 
       <CardContent>
         <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col gap-4">
-          {fields.map(({ name, label, type = 'text', placeholder }) => (
-            <div className="" key={name}>
-              <Label htmlFor={name} className='text-lg'>{label}</Label>
-              <Input
-                id={name}
-                type={type}
-                placeholder={placeholder}
-                disabled={isLoading}
-                {...register(name)}
-              />
-              <FormError errors={errors} name={name} />
-            </div>
-          ))}
+          <div className={`items-end ${fields.length>3?'grid grid-cols-2 gap-3':''}`}>
+            {fields.map(({ name, label, type = 'text', placeholder, children, value }, index) => (
+              <div className={fields.length > 3 && index === fields.length - 1 && fields.length % 2 > 0? 'col-span-2' : ''} key={name}>
+                {type == 'hidden'? null : <Label htmlFor={name} className='text-lg'>{label}</Label>}
+                <div className='flex gap-2 items-center'>
+                    <Controller
+                    name={name}
+                    control={control}
+                    render={({ field }) => (
+                      type == 'textarea' ?
+                      <Textarea
+                        id={name}
+                        type={type}
+                        placeholder={placeholder}
+                        disabled={isLoading}
+                        value = {value? value : ''}
+                        {...field}/> 
+                        :
+                      <Input
+                        id={name}
+                        type={type}
+                        placeholder={placeholder}
+                        disabled={isLoading}
+                        value = {value? value : ''}
+                        {...field}
+                      /> 
+                    )}
+                  />
+                    {children}
+                </div>
+                
+                <FormError errors={errors} name={name} />
+              </div>
+            ))}
+            {children}
+          </div>
+
 
           {error && (
             <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm">{error}</div>
           )}
+          {recaptcha &&
           <div className='w-full flex justify-center max-xs:scale-85'>
             <ReCAPTCHA
             sitekey="6Le6TT0rAAAAAHU_N1_hMggXegZoA8gyl4FNeEEM"
             onChange={(token) => setRecaptchaToken(token)}
             onExpired={() => setRecaptchaToken(null)}
             />
-          </div>
+          </div>}
+          
           
 
           <Button
             type="submit"
-            className="bg-dubraSecondary hover:bg-dubraSecondary/80 font-bold"
+            className="button-dubraSecondary duration-200 transition-all group font-bold"
             disabled={isLoading}
           >
-            {isLoading ? 'Procesando...' : title}
+            <p className='duration-200 transition-all group-hover:scale-105'>{isLoading ? 'Procesando...' : title}</p>
           </Button>
         </form>
       </CardContent>
