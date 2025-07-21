@@ -4,7 +4,7 @@ const HeroSection = ({title, subtitle, extraComponent, imageSrc, background, tex
   return (
     //Every section on the web have this structure:
     //'extraComponent', 'imageSrc', 'subtitle', 'centerContent', 'fit', 'textColor' tags are optional.
-    <section id={id} className={`flex ${customHeight? customHeight : 'h-150'} w-full bg-cover bg-center justify-center items-center`} style={{ backgroundImage: `url(${imageSrc})` }}>
+    <section id={id} className={`flex ${customHeight? customHeight : 'h-150'} ${background} w-full bg-cover bg-center justify-center items-center`} style={{ backgroundImage: `url(${imageSrc})` }}>
 
     <div className={`w-full h-full p-5 ${background} flex `}>
         <div className={`w-full flex items-center ${centerContent? 'justify-center':'pt-5'} ${textColor} flex-col`}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import ServiceCard from '../ServiceCard';
+import ServiceCard from '../card/ServiceCard';
 import { ArrowBigRight, PackageSearchIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 

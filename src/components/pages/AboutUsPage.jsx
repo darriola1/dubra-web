@@ -1,7 +1,7 @@
 import React from "react";
 import HeroSection from "../HeroSection";
 import DubraCamioneta from "@/assets/DubraCamioneta3.png";
-import HeroCard from "../HeroCard";
+import HeroCard from "../card/HeroCard";
 
 const AboutUsPage = () => {
   return (
@@ -12,7 +12,7 @@ const AboutUsPage = () => {
         subtitle=""
         background="bg-dubraText"
         centerContent={false}
-        customHeight="h-fit"
+        customHeight="h-fit min-h-dvh"
         extraComponent={
           <div className="pt-5 size-full flex flex-col items-center gap-10">
             <HeroCard

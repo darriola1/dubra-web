@@ -1,6 +1,6 @@
 import React from 'react'
-import HeroSection from '../HeroSection'
-import PlaceOrderForm from '../PlaceOrderForm'
+import HeroSection from '../../HeroSection'
+import PlaceOrderForm from '../../PlaceOrderForm'
 
 const NewOrderPage = () => {
   return (

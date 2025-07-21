@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { STATUS_SHIPPING_OPTIONS } from '../../src/lib/constants';
+import { STATUS_SHIPPING_OPTIONS } from '@/lib/constants'; 
 
 const ShippingCard = ({ shipping, onClose }) => {
     const [isVisible, setIsVisible] = useState(true);

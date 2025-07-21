@@ -5,15 +5,14 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
-  } from "./ui/card"
-import '../styles.css'
+  } from "../ui/card"
 
 const ServiceCard = ({title, description, content, icon, background, button, iconDiv }) => {
   return (
     //The 'background' tag allows the usage of different background colors.
     //The 'description' tag it's a subtitle below the 'title'.
     //The following tags are optional: 'button', 'description', 'background'.
-    <Card className={`w-[30vh] ${background} col-span-1 border-0 shadow-none place-self-center`}>
+    <Card className={`w-70 ${background} col-span-1 border-0 shadow-none place-self-center`}>
         <CardHeader className="flex items-center gap-3">
           {icon && <div className={iconDiv}>{icon}</div>}
           <div>

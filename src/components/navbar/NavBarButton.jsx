@@ -18,8 +18,8 @@ const NavBarButton = ({ text, link, icon }) => {
             ${isActive ? "after:w-full after:bg-dubraSecondary " : "after:w-0"} hover:after:w-full text-center`}
           onClick={() => window.scrollTo({ top: 0 })}
         > 
-          {icon}
-          {text}
+          <div>{icon}</div>
+          <p>{text}</p>
         </Link>
       </NavigationMenuLink>
     </NavigationMenuItem>

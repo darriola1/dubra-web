@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { API_BASE_URL, STATUS_SHIPPING_OPTIONS } from '../../lib/constants';
+import { API_BASE_URL, STATUS_SHIPPING_OPTIONS } from '@/lib/constants';
 import Filters from "@/components/shared/Filters";
 import Pagination from "@/components/shared/Pagination";
 

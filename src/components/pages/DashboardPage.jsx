@@ -1,22 +1,26 @@
-import { ArrowBigRight, Database, PackagePlus, PackageSearch, Phone, User, FileSliders } from 'lucide-react'
+import { ArrowBigRight } from 'lucide-react'
 import ResponsiveNavBar from "../navbar/ResponsiveNavBar";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import NavBar from "../navbar/NavBar";
 import { Outlet } from "react-router-dom";
-import { useAuth } from '@/context/AuthContext'
+import { FULL_ROUTES} from '@/lib/routeConfig';
+import { useAuth } from '@/context/AuthContext';
 
 const DashboardPage = () => {
-  const { user } = useAuth();
 
-  const fields = [
-    { text: 'Panel de Control', link: `/${user?.role}/dashboard`, icon: <Database /> },
-    { text: 'Gestioná tus Pedidos', link: `/${user?.role}/placeOrder`, icon: <PackageSearch /> },
-    { text: 'Panel administrativo', link: `/${user?.role}/administrationPanel`, icon: <FileSliders /> },
-    { text: 'Creá una nueva Orden', link: `/${user?.role}/newOrder`, icon: <PackagePlus /> },
-    { text: 'Personalizá tu Perfil', link: `/${user?.role}/profile`, icon: <User /> },
-    { text: 'Ponete en Contacto', link: `/${user?.role}/contact`, icon: <Phone /> },
-  ];
+  const {user} = useAuth()
 
+  // const fields = [
+  //   { text: 'Panel de Control', link: `/${user?.role}/dashboard`, icon: <Database /> },
+  //   { text: 'Gestioná tus Pedidos', link: `/${user?.role}/placeOrder`, icon: <PackageSearch /> },
+  //   { text: 'Panel administrativo', link: `/${user?.role}/administrationPanel`, icon: <FileSliders /> },
+  //   { text: 'Creá una nueva Orden', link: `/${user?.role}/newOrder`, icon: <PackagePlus /> },
+  //   { text: 'Personalizá tu Perfil', link: `/${user?.role}/profile`, icon: <User /> },
+  //   { text: 'Ponete en Contacto', link: `/${user?.role}/contact`, icon: <Phone /> },
+  // ];
+  // todo: ask why user?.role
+    const fields = FULL_ROUTES(user?.role)
+    console.log(fields)
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -45,7 +49,7 @@ const DashboardPage = () => {
           className={`justify-start  ${isOpen ? 'opacity-100 visible bg-black/50' : 'opacity-0 invisible' } `}
           Logo={true}/>
 
-        <div className='sm:w-1/5 bg-dubraPrimary max-md:hidden'>
+        <div className='sm:w-1/5 bg-dubraPrimary max-lg:hidden'>
 
           <NavBar
           fields={fields}
@@ -63,7 +67,7 @@ const DashboardPage = () => {
       </div>
 
       <div className="fixed h-full flex items-center pb-25">
-        <div className="bg-dubraSecondary py-5 rounded-r hover:bg-dubraSecondary/80 md:hidden " onClick={() => setIsOpen(!isOpen)}>
+        <div className="bg-dubraSecondary py-5 rounded-r hover:bg-dubraSecondary/80 lg:hidden " onClick={() => setIsOpen(!isOpen)}>
           <ArrowBigRight/>
         </div>
       </div>

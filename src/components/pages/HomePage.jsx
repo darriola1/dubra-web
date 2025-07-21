@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import HeroSection from '../HeroSection'
-import ServiceCard from '../ServiceCard'
+import ServiceCard from '../card/ServiceCard'
 import camioneta from '@/assets/DubraCamioneta1.png'
 import { Truck, FileText, PackageOpen, History } from 'lucide-react'
 import TrackingInputGroup from '../TrackingInputGroup'
-import ShippingCard from '../ShippingCard'
-import CardGrid from '../CardGrid'
+import ShippingCard from '../card/ShippingCard'
+import CardGrid from '../card/CardGrid'
 import { API_BASE_URL } from '../../lib/constants';
 
 const HomePage = () => {

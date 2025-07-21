@@ -1,7 +1,7 @@
 import React from 'react'
-import HeroSection from '../HeroSection';
-import ProfileCard from '../ProfileCard';
-import HistoryCard from '../HistoryCard';
+import HeroSection from '@/components/HeroSection';
+import ProfileCard from '@/components/ProfileCard';
+import HistoryCard from '@/components/HistoryCard';
 
 const ProfilePage = () => {
   return (

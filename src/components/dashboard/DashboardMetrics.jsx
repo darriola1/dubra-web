@@ -1,5 +1,5 @@
 import React from "react";
-import ServiceCard from "../ServiceCard";
+import ServiceCard from "../card/ServiceCard";
 import {
   Ban,
   Calendar,
@@ -8,9 +8,9 @@ import {
   FileQuestion,
 } from "lucide-react";
 
-const DashboardMetrics = ({rol, mdCols}) => {
+const DashboardMetrics = ({rol, cols}) => {
   return (
-    <div className={`grid md:grid-cols-${mdCols} gap-4 h-fit`}>
+    <div className={`grid ${cols} gap-4 h-fit w-fit`}>
         { rol == 'user' ? 
         (<><ServiceCard
         title="Pedidos a pagar"

@@ -1,7 +1,7 @@
 import { useAuth } from '@/context/AuthContext'
 import { History, Package } from 'lucide-react'
 import React from 'react'
-import OrderCard from './OrderCard'
+import OrderCard from './card/OrderCard'
 
 const HistoryCard = () => {
 

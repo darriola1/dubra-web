@@ -7,18 +7,17 @@ import LoginPage from './components/pages/LoginPage'
 import DashboardPage from './components/pages/DashboardPage'
 import Header from './components/Header';
 import Footer from './components/Footer';
-import AdminDashboardPage from './components/pages/AdminDashboardPage';
 import AdminDashboard from './components/dashboard/AdminDashboard';
-import AdminMapPage from './components/pages/AdminMapPage';
+import AdminMapPage from './components/pages/admin/AdminMapPage';
 import Dashboard from './components/dashboard/Dashboard';
-import AdminPlaceOrderPage from './components/pages/AdminPlaceOrderPage';
-import UserPlaceOrderPage from './components/pages/UserPlaceOrderPage'
-import AdminAdministrationPanel from './components/pages/AdminAdministrationPanel';
-import UserAdministrationPanel from './components/pages/UserAdministrationPanel';
+import AdminPlaceOrderPage from './components/pages/admin/AdminPlaceOrderPage';
+import UserPlaceOrderPage from './components/pages/user/UserPlaceOrderPage'
+import AdminAdministrationPanel from './components/pages/admin/AdminAdministrationPanel';
+import UserAdministrationPanel from './components/pages/user/UserAdministrationPanel';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
-import ProfilePage from './components/pages/ProfilePage';
-import NewOrderPage from './components/pages/NewOrderPage';
+import ProfilePage from './components/pages/user/ProfilePage';
+import NewOrderPage from './components/pages/user/NewOrderPage';
 import AboutUsPage from './components/pages/AboutUsPage';
 import ContactUsForm from './components/ContactUsForm';
 import { ToastContainer } from 'react-toastify';
@@ -50,7 +49,7 @@ function App() {
               </Route>
             <Route path='/admin'
               element={<ProtectedRoute>
-              <AdminDashboardPage/>
+              <DashboardPage/>
               </ProtectedRoute>}>
                 <Route path='dashboard' element={<AdminDashboard/>}/>
                 <Route path='administrationPanel' element={<AdminAdministrationPanel/>}/>

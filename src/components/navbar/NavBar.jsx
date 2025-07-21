@@ -13,7 +13,6 @@ import { ROUTES } from '@/lib/constants';
 
 const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo, className, width}) => {
 
-
   return (
 <div>
         <NavigationMenu className='justify-between min-w-full bg-dubraPrimary py-2'>
@@ -33,8 +32,8 @@ const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo, classN
                 {extraButton && extraButton}
 
                 <ul className='w-full'>
-                    <div className={`max-md:sr-only md:flex md:flex-row gap-5 items-center ${className}`}>
-                        {fields.map(({link, text, icon}, index) => (
+                    <div className={`max-lg:sr-only lg:flex lg:flex-row gap-5 items-center ${className} px-2`}>
+                        {fields && fields.map(({link, text, icon}, index) => (
                             <NavBarButton key={link+index} text={text} link={link} icon={icon && icon}/>
                         ))}
                         {extraFields && extraFields.map(({link, text, icon, onClick}, index) => (
@@ -53,7 +52,7 @@ const NavBar = ({fields, extraFields, extraButton, menuRef, isOpen, Logo, classN
             {/*NavBar for smaller than medium display.*/}
         <ResponsiveNavBar
             fields={
-                fields.concat(extraFields)
+                fields && fields.concat(extraFields)
             }
             className={` right-0 ${isOpen ? 'opacity-100 visible bg-black/50' : 'opacity-0 invisible'} `}
             menuRef={menuRef}

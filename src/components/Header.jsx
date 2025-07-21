@@ -41,12 +41,12 @@ const Header = () => {
   ].filter(Boolean);
 
   return (
-    <header className='w-full fixed bg-dubraPrimary px-5 lg:px-[15vh] outline-1 py-1 z-20'>
+    <header className='w-full fixed bg-dubraPrimary px-5 xl:px-[15vh] outline-1 py-1 z-20'>
       <NavBar
       fields={fields}
       extraFields= {extraFields}
       extraButton={
-        <Button className='bg-dubraSecondaryHover p-0 md:sr-only'  onClick={() => setIsOpen(!isOpen)}>
+        <Button className='bg-dubraSecondaryHover p-0 lg:sr-only'  onClick={() => setIsOpen(!isOpen)}>
           <AlignJustify className='w-fit h-fit' size={28}/>
         </Button>
       }

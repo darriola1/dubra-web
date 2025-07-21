@@ -5,13 +5,12 @@ import Chart from "../Chart";
 
 const AdminDashboard = () => {
   return (
-    <div className="items-center flex flex-col gap-5">
       <div className="flex flex-col gap-3 items-center">
         <div className="flex gap-5 items-center">
           <RecentOrders linkTo={"/admin/orderManager"} title={'Órdenes Confirmadas'}/>
           <RecentOrders linkTo={"/admin/orderManager"} title={'Órdenes a aprobar'}/>
           <RecentOrders linkTo={"/admin/orderManager"} title={'Órdenes completadas'}/>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 ">
             <DashboardMetrics />
           </div>
         </div>
@@ -20,7 +19,6 @@ const AdminDashboard = () => {
             <Chart/>
           </div>
       </div>
-    </div>
   );
 };
 

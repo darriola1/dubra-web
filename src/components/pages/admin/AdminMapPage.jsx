@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import LeafletMap from "../map/LeafletMap";
-import HeroSection from "../HeroSection";
-import RoutingMachine from "../map/RoutingMachine";
-import RoutingSelect from "../map/RoutingSelect";
+import LeafletMap from "@/components/map/LeafletMap";
+import RoutingMachine from "@/components/map/RoutingMachine";
+import RoutingSelect from "@/components/map/RoutingSelect";
 
 const AdminMapPage = () => {
   const [actualPoint, setPoint] = useState(null);
@@ -57,8 +56,8 @@ const AdminMapPage = () => {
 
   return (
     <section id="adminMap" className="size-full">
-      <div className="flex h-full w-full border-2 border-dubraSecondary rounded-e-2xl">
-        <div className="w-6/8 h-full">
+      <div className="flex max-md:flex-col md:flex-row h-full w-full border-2 border-dubraSecondary rounded-e-2xl">
+        <div className="md:w-6/8 h-full">
           <LeafletMap
             children={
               <RoutingMachine
@@ -68,7 +67,7 @@ const AdminMapPage = () => {
             }
           />
         </div>
-        <ul className="w-2/8 bg-dubraPrimary flex flex-col items-center rounded-e-2xl gap-5 overflow-y-auto p-2">
+        <ul className="md:w-2/8 bg-dubraPrimary flex flex-col items-center rounded-ee-2xl md:rounded-se-2xl gap-5 overflow-y-auto p-2">
           {points.map((point, index) => (
             <li key={index}>
               <RoutingSelect
